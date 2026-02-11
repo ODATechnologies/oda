@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ODA Catalog</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ===== 상단 헤더 ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 56px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #e5e5e5;
+      z-index: 3000;
+    }
+
+    .logo {
+      height: 22px;
+      width: auto;
+      display: block;
+    }
+
+    .phone {
+      color: #000;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ===== CTA 버튼 ===== */
+    .cta {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      width: 100%;
+      height: 56px;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 56px;
+      text-decoration: none;
+      z-index: 2500;
+    }
+
+    /* ===== 슬라이더 ===== */
+    .slider-container {
+      position: relative;
+      width: 100vw;
+      overflow: hidden;
+      background: #000;
+      padding-top: 112px; /* 헤더 + CTA 높이 */
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .slider img {
+      width: 100vw;
+      height: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    /* 페이지 인디케이터 */
+    .page-indicator {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      z-index: 4000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <img src="images/odalogo.png" alt="ODA Technologies" class="logo" />
+    <a href="tel:07018008644" class="phone">070-1800-8644</a>
+  </div>
+
+  <!-- CTA -->
+  <a class="cta" href="https://forms.gle/JdcosiosWY13QEAN6" target="_blank">
+    📞 1분 견적 요청
+  </a>
+
+  <!-- 카탈로그 슬라이더 -->
+  <div class="slider-container">
+    <div class="slider" id="slider"></div>
+  </div>
+
+  <!-- 페이지 표시 -->
+  <div class="page-indicator" id="pageIndicator">1 / 23</div>
+
+  <script>
+    const totalImages = 23;
+    const slider = document.getElementById("slider");
+    const indicator = document.getElementById("pageIndicator");
+
+    let currentIndex = 0;
+    let startX = 0;
+
+    // 이미지 자동 생성
+    for (let i = 0; i < totalImages; i++) {
+      const img = document.createElement("img");
+      img.src = `catalogs/ODA CATALOG(KOR)-이미지-${i}.jpg`;
+      img.alt = `카탈로그 ${i + 1}`;
+      slider.appendChild(img);
+    }
+
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentIndex * window.innerWidth}px)`;
+      indicator.textContent = `${currentIndex + 1} / ${totalImages}`;
+    }
+
+    // 터치 스와이프
+    slider.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", e => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (diff > 50 && currentIndex < totalImages - 1) {
+        currentIndex++;
+      } else if (diff < -50 && currentIndex > 0) {
+        currentIndex--;
+      }
+
+      updateSlider();
+    });
+
+    window.addEventListener("resize", updateSlider);
+
+    updateSlider();
+  </script>
+
+</body>
+</html>
