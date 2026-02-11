@@ -2,71 +2,84 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ODA Catalog</title>
 
 <style>
+:root {
+  --header-h: 56px;
+  --cta-h: 56px;
+}
+
+* { box-sizing: border-box; }
+
 html, body {
   margin: 0;
   padding: 0;
   background: #000;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  overflow: hidden;
 }
 
-/* ===== 헤더 ===== */
+/* ===== Header ===== */
 .header {
   position: fixed;
   top: 0;
   left: 0;
+  height: var(--header-h);
   width: 100%;
-  height: 56px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  box-sizing: border-box;
-  z-index: 3000;
+  padding: 0 14px;
+  z-index: 1000;
 }
 
-.logo {
-  height: 22px;
-  flex-shrink: 0;
-}
+.logo { height: 22px; }
 
 .phone {
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
   color: #000;
   text-decoration: none;
-  white-space: nowrap;
 }
 
-/* ===== CTA (고급화) ===== */
+/* ===== CTA (프리미엄) ===== */
 .cta {
   position: fixed;
-  top: 56px;
+  top: var(--header-h);
+  left: 0;
   width: 100%;
-  height: 56px;
-  background: linear-gradient(135deg, #ff7a18, #ff9f00);
+  height: var(--cta-h);
+  background: linear-gradient(
+    120deg,
+    #ff8a00 0%,
+    #ffb347 50%,
+    #ff8a00 100%
+  );
+  background-size: 200% 100%;
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   text-align: center;
-  line-height: 56px;
+  line-height: var(--cta-h);
   text-decoration: none;
-  z-index: 2500;
+  z-index: 900;
+  animation: shine 6s linear infinite;
 }
 
-/* ===== 언어 선택 ===== */
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ===== Language Select ===== */
 .lang-select {
-  position: fixed;
-  inset: 0;
-  padding-top: 112px;
+  min-height: 100vh;
+  padding-top: calc(var(--header-h) + var(--cta-h));
   display: flex;
-  z-index: 2000;
 }
 
 .lang {
@@ -75,19 +88,19 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: #111;
+  color: #fff;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.lang:hover { transform: scale(1.02); }
-
-.lang.kor { background: #111; }
 .lang.eng { background: #1a1a1a; }
+
+.lang:hover { background: #222; }
 
 .lang .title {
   font-size: 22px;
   font-weight: 800;
-  color: #fff;
 }
 
 .lang .sub {
@@ -96,24 +109,23 @@ html, body {
   color: #aaa;
 }
 
-/* 하단 선택 안내 */
+/* 선택 안내 */
 .select-guide {
   position: fixed;
-  bottom: 24px;
+  bottom: 20px;
   width: 100%;
   text-align: center;
   font-size: 14px;
   color: #fff;
   animation: blink 1.4s infinite;
-  z-index: 2100;
 }
 
-/* ===== 슬라이더 ===== */
+/* ===== Slider ===== */
 .slider-container {
-  padding-top: 112px;
-  height: 100vh;
-  overflow: hidden;
   display: none;
+  padding-top: calc(var(--header-h) + var(--cta-h));
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .slider {
@@ -122,17 +134,17 @@ html, body {
 }
 
 .slider img {
-  height: calc(100vh - 112px);
+  height: calc(100vh - var(--header-h) - var(--cta-h));
   aspect-ratio: 1 / 1.414;
   object-fit: contain;
   margin: auto;
   flex-shrink: 0;
 }
 
-/* 좌우 안내 (1페이지 전용) */
+/* Swipe guide */
 .swipe-guide {
   position: fixed;
-  bottom: 64px;
+  bottom: 60px;
   width: 100%;
   text-align: center;
   font-size: 14px;
@@ -141,7 +153,6 @@ html, body {
   display: none;
 }
 
-/* 페이지 표시 */
 .page-indicator {
   position: fixed;
   bottom: 16px;
@@ -153,7 +164,6 @@ html, body {
   font-size: 13px;
 }
 
-/* 애니메이션 */
 @keyframes blink {
   0%,100% { opacity: 1; }
   50% { opacity: 0.3; }
@@ -163,18 +173,15 @@ html, body {
 
 <body>
 
-<!-- 헤더 -->
 <div class="header">
   <img src="odalogo_new20220221(가로).png" class="logo">
-  <a href="tel:18008644" class="phone">070-1800-8644</a>
+  <a href="tel:18008644" class="phone">📞1800-8644</a>
 </div>
 
-<!-- CTA -->
 <a class="cta" href="https://forms.gle/JdcosiosWY13QEAN6" target="_blank">
   제품 상담 · 견적 문의
 </a>
 
-<!-- 언어 선택 -->
 <div class="lang-select" id="langSelect">
   <div class="lang kor" onclick="loadCatalog('kor')">
     <div class="title">KOREAN CATALOG</div>
@@ -190,7 +197,6 @@ html, body {
   선택해주세요<br/>Please select
 </div>
 
-<!-- 슬라이더 -->
 <div class="slider-container" id="sliderContainer">
   <div class="slider" id="slider"></div>
 </div>
@@ -224,7 +230,6 @@ function update() {
   const slider = document.getElementById("slider");
   const w = slider.children[0].getBoundingClientRect().width;
   slider.style.transform = `translateX(-${index * w}px)`;
-
   document.getElementById("indicator").textContent = `${index + 1} / ${total}`;
   document.getElementById("swipeGuide").style.display = index === 0 ? "block" : "none";
 }
