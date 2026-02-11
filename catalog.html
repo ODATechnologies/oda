@@ -1,215 +1,195 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>ODA Catalog</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ODA Catalog</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      overflow-x: hidden;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow: hidden;
+}
 
-    /* ===== 상단 헤더 ===== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 56px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 14px;
-      box-sizing: border-box;
-      border-bottom: 1px solid #e5e5e5;
-      z-index: 3000;
-    }
+/* ===== 언어 선택 화면 ===== */
+.lang-select {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  z-index: 5000;
+}
 
-    .logo {
-      height: 22px;
-      width: auto;
-    }
+.lang {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.35s ease, background 0.35s ease;
+}
 
-    .phone {
-      color: #000;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-    }
+.lang.kor {
+  background: linear-gradient(135deg, #111, #333);
+}
 
-    /* ===== CTA ===== */
-    .cta {
-      position: fixed;
-      top: 56px;
-      left: 0;
-      width: 100%;
-      height: 56px;
-      background: linear-gradient(270deg, #ff6a00, #ff9f00, #ff6a00);
-      background-size: 400% 400%;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 800;
-      text-align: center;
-      line-height: 56px;
-      text-decoration: none;
-      z-index: 2500;
-      animation: gradientMove 4s ease infinite, pulse 1.8s ease-in-out infinite;
-    }
+.lang.eng {
+  background: linear-gradient(135deg, #333, #111);
+}
 
-    /* ===== 슬라이더 영역 ===== */
-    .slider-container {
-      padding-top: 112px; /* header + CTA */
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      background: #000;
-      position: relative;
-    }
+.lang:hover {
+  transform: scale(1.03);
+}
 
-    .slider {
-      display: flex;
-      transition: transform 0.35s ease;
-    }
+/* ===== 헤더 ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  z-index: 3000;
+}
 
-    .slider img {
-      height: calc(100vh - 112px);
-      width: auto;
-      aspect-ratio: 1 / 1.414; /* A4 비율 */
-      object-fit: contain;
-      flex-shrink: 0;
-      margin: 0 auto;
-    }
+.logo { height: 22px; }
+.phone { color: #000; font-weight: 600; text-decoration: none; }
 
-    /* ===== 첫 페이지 안내 ===== */
-    .swipe-hint {
-      position: fixed;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #fff;
-      font-size: 15px;
-      background: rgba(0,0,0,0.6);
-      padding: 10px 18px;
-      border-radius: 24px;
-      z-index: 4000;
-      animation: hintMove 1.8s ease-in-out infinite;
-    }
+/* ===== CTA ===== */
+.cta {
+  position: fixed;
+  top: 56px;
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(270deg, #ff6a00, #ff9f00, #ff6a00);
+  background-size: 400% 400%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 56px;
+  text-decoration: none;
+  z-index: 2500;
+  animation: gradient 4s ease infinite, pulse 1.8s ease infinite;
+}
 
-    /* 페이지 인디케이터 */
-    .page-indicator {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      background: rgba(0,0,0,0.6);
-      color: #ffffff;
-      font-size: 13px;
-      padding: 6px 12px;
-      border-radius: 20px;
-      z-index: 4000;
-    }
+/* ===== 슬라이더 ===== */
+.slider-container {
+  padding-top: 112px;
+  height: 100vh;
+  overflow: hidden;
+}
 
-    /* ===== 애니메이션 ===== */
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+.slider {
+  display: flex;
+  transition: transform 0.35s ease;
+}
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
+.slider img {
+  height: calc(100vh - 112px);
+  aspect-ratio: 1 / 1.414;
+  object-fit: contain;
+  margin: auto;
+  flex-shrink: 0;
+}
 
-    @keyframes hintMove {
-      0% { transform: translate(-50%, 0); opacity: 0.6; }
-      50% { transform: translate(-50%, -6px); opacity: 1; }
-      100% { transform: translate(-50%, 0); opacity: 0.6; }
-    }
-  </style>
+/* 페이지 표시 */
+.page-indicator {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* 애니메이션 */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- 헤더 -->
-  <div class="header">
-    <img src="odalogo_new20220221(가로).png" alt="ODA Technologies" class="logo" />
-    <a href="tel:18008644" class="phone">📞 1800-8644</a>
-  </div>
+<!-- 언어 선택 -->
+<div class="lang-select" id="langSelect">
+  <div class="lang kor" onclick="loadCatalog('kor')">📘 KOREAN CATALOG</div>
+  <div class="lang eng" onclick="loadCatalog('eng')">📕 ENGLISH CATALOG</div>
+</div>
 
-  <!-- CTA -->
-  <a class="cta" href="https://forms.gle/JdcosiosWY13QEAN6" target="_blank">
-    📩 제품 문의 및 견적 요청
-  </a>
+<!-- 헤더 -->
+<div class="header">
+  <img src="odalogo_new20220221(가로).png" class="logo">
+  <a href="tel:18008644" class="phone">📞 1800-8644</a>
+</div>
 
-  <!-- 슬라이더 -->
-  <div class="slider-container">
-    <div class="slider" id="slider"></div>
-  </div>
+<!-- CTA -->
+<a class="cta" href="https://forms.gle/JdcosiosWY13QEAN6" target="_blank">
+  📩 제품 문의 및 견적 요청
+</a>
 
-  <!-- 첫 페이지 안내 -->
-  <div class="swipe-hint" id="swipeHint">← 좌우로 넘겨보세요 →</div>
+<!-- 슬라이더 -->
+<div class="slider-container">
+  <div class="slider" id="slider"></div>
+</div>
 
-  <!-- 페이지 표시 -->
-  <div class="page-indicator" id="pageIndicator">1 / 23</div>
+<div class="page-indicator" id="indicator">1 / 23</div>
 
-  <script>
-    const totalImages = 23;
-    const slider = document.getElementById("slider");
-    const indicator = document.getElementById("pageIndicator");
-    const swipeHint = document.getElementById("swipeHint");
+<script>
+const total = 23;
+let index = 0;
+let startX = 0;
+let folder = "";
 
-    let currentIndex = 0;
-    let startX = 0;
+function loadCatalog(lang) {
+  folder = lang;
+  document.getElementById("langSelect").style.display = "none";
 
-    // 이미지 생성
-    for (let i = 0; i < totalImages; i++) {
-      const img = document.createElement("img");
-      img.src = `catalogs/ODA CATALOG(KOR)-이미지-${i}.jpg`;
-      img.alt = `카탈로그 ${i + 1}`;
-      slider.appendChild(img);
-    }
+  const slider = document.getElementById("slider");
+  slider.innerHTML = "";
 
-    function updateSlider() {
-      const imgWidth = slider.children[0].getBoundingClientRect().width;
-      slider.style.transform = `translateX(-${currentIndex * imgWidth}px)`;
-      indicator.textContent = `${currentIndex + 1} / ${totalImages}`;
+  for (let i = 0; i < total; i++) {
+    const img = document.createElement("img");
+    img.src = `catalogs/${folder}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
+    slider.appendChild(img);
+  }
+  update();
+}
 
-      // 첫 페이지 아니면 안내 숨김
-      if (currentIndex > 0) {
-        swipeHint.style.display = "none";
-      }
-    }
+function update() {
+  const slider = document.getElementById("slider");
+  const w = slider.children[0].getBoundingClientRect().width;
+  slider.style.transform = `translateX(-${index * w}px)`;
+  document.getElementById("indicator").textContent = `${index+1} / ${total}`;
+}
 
-    // 터치 이벤트
-    slider.addEventListener("touchstart", e => {
-      startX = e.touches[0].clientX;
-    });
-
-    slider.addEventListener("touchend", e => {
-      const endX = e.changedTouches[0].clientX;
-      const diff = startX - endX;
-
-      if (diff > 50 && currentIndex < totalImages - 1) {
-        currentIndex++;
-      } else if (diff < -50 && currentIndex > 0) {
-        currentIndex--;
-      }
-
-      updateSlider();
-    });
-
-    window.addEventListener("resize", updateSlider);
-
-    updateSlider();
-  </script>
+document.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+document.addEventListener("touchend", e => {
+  const diff = startX - e.changedTouches[0].clientX;
+  if (diff > 50 && index < total-1) index++;
+  if (diff < -50 && index > 0) index--;
+  update();
+});
+</script>
 
 </body>
 </html>
