@@ -222,6 +222,14 @@ html, body {
   0%,100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
+/* ✅ 다크모드 무시용 (맨 아래) */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: #000;
+    color: #fff;
+  }
+}
+</style>  
 </style>
 </head>
 
