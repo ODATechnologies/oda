@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="light">
-  <title>ODA Catalog</title>
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ODA Catalog</title>
 
 <style>
 :root {
@@ -222,14 +220,6 @@ html, body {
   0%,100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
-/* ✅ 다크모드 무시용 (맨 아래) */
-@media (prefers-color-scheme: dark) {
-  html, body {
-    background: #000;
-    color: #fff;
-  }
-}
-</style>  
 </style>
 </head>
 
@@ -247,8 +237,8 @@ html, body {
 <!-- Language Select -->
 <div class="lang-select" id="langSelect">
   <div class="lang kor" onclick="loadCatalog('kor')">
-    <div class="title">국문 카탈로그</div>
-    <div class="sub">KOREAN CATALOG</div>
+    <div class="title">KOREAN CATALOG</div>
+    <div class="sub">국문 카탈로그</div>
   </div>
 
   <div class="lang eng" onclick="loadCatalog('eng')">
