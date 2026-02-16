@@ -2,315 +2,240 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ODA Catalog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>ODA</title>
 
 <style>
-:root {
-  --header-h: 56px;
-  --cta-h: 70px;
-}
-
-* { box-sizing: border-box; }
-
-html, body {
+body {
   margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
   background: #000;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #fff;
 }
 
-/* ===== Header ===== */
+/* ================= 상단 ================= */
+
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: var(--header-h);
-  width: 100%;
-  background: #fff;
+  text-align: center;
+  padding: 20px 10px 10px;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 10px;
+}
+
+.top-links {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ================= 탭 ================= */
+
+.tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-  z-index: 1000;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-.logo { height: 22px; }
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 14px 0;
+  cursor: pointer;
+  font-weight: 700;
+  background: rgba(255,255,255,0.05);
+}
 
-.header-right {
+.tab.active {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ================= 선택 영역 ================= */
+
+.select-wrap {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  height: calc(100vh - 160px);
 }
 
-.home-link,
-.phone {
-  font-size: 13px;
-  font-weight: 600;
-  color: #000;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* ===== Language Select ===== */
-.lang-select {
-  min-height: 100vh;
-  padding-top: var(--header-h);
-  padding-bottom: var(--cta-h);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.lang {
+.select-box {
   flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #111;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.lang.eng { background: #1a1a1a; }
-.lang:hover { background: #222; }
-
-.lang .title {
   font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
+  font-weight: bold;
+  cursor: pointer;
+  border-right: 1px solid rgba(255,255,255,0.15);
 }
 
-.lang .sub {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #aaa;
+.select-box:last-child {
+  border-right: none;
 }
 
-/* ===== Center Guide ===== */
-.center-guide {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-}
-
-.center-guide::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  right: 5%;
-  height: 1px;
-  background: rgba(255,255,255,0.25);
-}
-
-.center-guide span {
-  position: relative;
-  display: inline-block;
-  padding: 8px 18px;
-  font-size: 13px;
-  color: #fff;
-  background: rgba(0,0,0,0.7);
-  border-radius: 20px;
-  line-height: 1.4;
-  animation: blink 1.4s infinite;
-}
-
-/* ===== Bottom CTA (텍스트 중앙 정렬 수정) ===== */
-.bottom-cta {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  max-width: 360px;
-  height: 52px;
-
-  display: flex;
-  flex-direction: column;      /* 🔥 */
-  align-items: center;         /* 🔥 가로 중앙 */
-  justify-content: center;     /* 🔥 세로 중앙 */
-  text-align: center;          /* 🔥 텍스트 중앙 */
-
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.25;
-  color: #fff;
-  text-decoration: none;
-
-  border-radius: 20px;
-  background: linear-gradient(
-    120deg,
-    #e86f00 0%,
-    #ff9a2f 50%,
-    #EB4C00 100%
-  );
-  background-size: 200% 100%;
-  animation: ctaFlow 6s ease-in-out infinite;
-
-  box-shadow: 0 6px 18px rgba(232,111,0,0.55);
-  z-index: 900;
-}
-
-.bottom-cta:active {
-  transform: translateX(-50%) scale(0.97);
-}
-
-.bottom-cta .cta-sub {
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 2px;        /* 줄 간격 미세 조정 */
-  letter-spacing: 0.2px; /* 영어 가독성 */
-}
-  
-@keyframes ctaFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ===== Slider ===== */
-.slider-container {
-  display: none;
-  padding-top: var(--header-h);
-  padding-bottom: var(--cta-h);
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.slider {
-  display: flex;
-  transition: transform 0.35s ease;
-}
-
-.slider img {
-  width: 100vw;
-  height: calc(100vh - var(--header-h) - var(--cta-h));
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.swipe-guide {
-  position: fixed;
-  bottom: 90px;
-  width: 100%;
-  text-align: center;
+.select-box span {
+  display: block;
   font-size: 14px;
-  color: #fff;
-  animation: blink 1.4s infinite;
-  display: none;
+  opacity: 0.7;
+  margin-top: 8px;
 }
 
-.page-indicator {
+/* ================= 영상 ================= */
+
+#videoSection {
+  display: none;
   position: fixed;
-  bottom: 90px;
-  right: 16px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  display: none;
+  inset: 0;
+  background: black;
+  z-index: 999;
 }
 
-@keyframes blink {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.3; }
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: black;
 }
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: none;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- Header -->
+<!-- ================= 헤더 ================= -->
+
 <div class="header">
-  <img src="odalogo_new20220221(가로).png" class="logo">
-  <div class="header-right">
-    <a href="https://www.odacore.com/main" target="_blank" class="home-link">🌐 홈페이지</a>
-    <a href="tel:18008644" class="phone">📞1800-8644</a>
+
+  <img src="logo.png" class="logo" />
+
+  <div class="top-links">
+    www.oda.com<br>
+    000-0000-0000
   </div>
+
 </div>
 
-<!-- Language Select -->
-<div class="lang-select" id="langSelect">
-  <div class="lang kor" onclick="loadCatalog('kor')">
-    <div class="title">국문 카탈로그</div>
-    <div class="sub">KOREAN CATALOG</div>
-  </div>
+<!-- ================= TAB ================= -->
 
-  <div class="lang eng" onclick="loadCatalog('eng')">
-    <div class="title">ENGLISH CATALOG</div>
-    <div class="sub">영문 카탈로그</div>
-  </div>
-
-  <div class="center-guide">
-    <span>
-      선택해주세요<br>
-      Please select
-    </span>
-  </div>
+<div class="tabs">
+  <div class="tab active" onclick="showTab('intro')">회사 소개</div>
+  <div class="tab" onclick="showTab('catalog')">카탈로그</div>
 </div>
 
-<!-- Slider -->
-<div class="slider-container" id="sliderContainer">
-  <div class="slider" id="slider"></div>
+<!-- ================= 회사 소개 ================= -->
+
+<div id="introTab" class="select-wrap">
+
+  <div class="select-box" onclick="playVideo('oda/int/kor.mp4')">
+    한국어 영상
+    <span>Korean Video</span>
+  </div>
+
+  <div class="select-box" onclick="playVideo('oda/int/eng.mp4')">
+    영문 영상
+    <span>English Video</span>
+  </div>
+
 </div>
 
-<div class="swipe-guide" id="swipeGuide">← 좌우로 움직여주세요 →</div>
-<div class="page-indicator" id="indicator">1 / 44</div>
+<!-- ================= 카탈로그 ================= -->
 
-<!-- Bottom CTA -->
-<a
-  class="bottom-cta"
-  href="https://forms.gle/JdcosiosWY13QEAN6"
-  target="_blank"
->
-  제품 상담 · 견적 문의<br>
-  <span class="cta-sub">Quote Request</span>
-</a>
+<div id="catalogTab" class="select-wrap" style="display:none">
+
+  <div class="select-box">
+    국문 카탈로그
+    <span>Korean Catalog</span>
+  </div>
+
+  <div class="select-box">
+    ENGLISH CATALOG
+    <span>영문 카탈로그</span>
+  </div>
+
+</div>
+
+<!-- ================= 영상 플레이 ================= -->
+
+<div id="videoSection">
+
+  <button class="back-btn" onclick="exitVideo()">뒤로가기</button>
+
+  <video id="player" controls></video>
+
+</div>
+
+<!-- ================= JS ================= -->
 
 <script>
-const total = 44;
-let index = 0;
-let startX = 0;
 
-function loadCatalog(lang) {
-  document.getElementById("langSelect").style.display = "none";
-  document.getElementById("sliderContainer").style.display = "block";
-  document.getElementById("indicator").style.display = "block";
+function showTab(tab) {
 
-  const slider = document.getElementById("slider");
-  slider.innerHTML = "";
-  index = 0;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"))
 
-  for (let i = 0; i < total; i++) {
-    const img = document.createElement("img");
-    img.src = `catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
-    slider.appendChild(img);
+  if (tab === "intro") {
+    document.getElementById("introTab").style.display = "flex"
+    document.getElementById("catalogTab").style.display = "none"
+    document.querySelectorAll(".tab")[0].classList.add("active")
   }
-  update();
+
+  if (tab === "catalog") {
+    document.getElementById("introTab").style.display = "none"
+    document.getElementById("catalogTab").style.display = "flex"
+    document.querySelectorAll(".tab")[1].classList.add("active")
+  }
+
 }
 
-function update() {
-  const slider = document.getElementById("slider");
-  const w = slider.children[0].getBoundingClientRect().width;
-  slider.style.transform = `translateX(-${index * w}px)`;
-  document.getElementById("indicator").textContent = `${index + 1} / ${total}`;
-  document.getElementById("swipeGuide").style.display = index === 0 ? "block" : "none";
+function playVideo(src) {
+
+  const video = document.getElementById("player")
+  const section = document.getElementById("videoSection")
+
+  video.src = src
+  section.style.display = "block"
+
+  video.play()
+
+  if (video.requestFullscreen) {
+    video.requestFullscreen()
+  }
+
+  video.onended = () => {
+    exitVideo()
+  }
+
 }
 
-document.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-document.addEventListener("touchend", e => {
-  const diff = startX - e.changedTouches[0].clientX;
-  if (diff > 50 && index < total - 1) index++;
-  if (diff < -50 && index > 0) index--;
-  update();
-});
+function exitVideo() {
+
+  const video = document.getElementById("player")
+  const section = document.getElementById("videoSection")
+
+  video.pause()
+  video.src = ""
+
+  section.style.display = "none"
+
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+  }
+
+}
+
 </script>
 
 </body>
