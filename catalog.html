@@ -404,12 +404,6 @@ html, body {
     <div class="modal-close" onclick="closeVideoModal()">닫기</div>
   </div>
 </div>
-
-<!-- Call Modal -->
-<div class="modal" id="callModal">
-  <div class="modal-box">
-    <h3>1800-8644 로 전화하시겠습니까?</h3>
-    <div class="modal-btn" onclick="closeCallModal()">취소</div>
     <a href="tel:18008644" class="modal-btn">전화걸기</a>
   </div>
 </div>
@@ -493,13 +487,6 @@ function closeVideoModal() {
   document.getElementById("videoModal").classList.remove("active");
 }
 
-/* Call Modal */
-function openCallModal() {
-  document.getElementById("callModal").classList.add("active");
-}
-function closeCallModal() {
-  document.getElementById("callModal").classList.remove("active");
-}
 </script>
 
 </body>
