@@ -388,8 +388,19 @@ html, body {
 <div class="modal" id="videoModal">
   <div class="modal-box">
     <h3>소개 영상 선택</h3>
-    <a href="oda/int/kor.mp4" target="_blank" class="modal-btn">KOR Ver</a>
-    <a href="oda/int/eng.mp4" target="_blank" class="modal-btn">ENG Ver</a>
+
+    <a href="https://odatechnologies.github.io/oda/int/kor.mp4"
+       target="_blank"
+       class="modal-btn">
+       KOR Ver
+    </a>
+
+    <a href="https://odatechnologies.github.io/oda/int/eng.mp4"
+       target="_blank"
+       class="modal-btn">
+       ENG Ver
+    </a>
+
     <div class="modal-close" onclick="closeVideoModal()">닫기</div>
   </div>
 </div>
@@ -417,7 +428,7 @@ window.addEventListener("load", () => {
 
   setTimeout(() => {
     logo.style.opacity = "1";
-    logo.style.transform = "translate(-50%, -50%) scale(1)";
+    logo.style.transform = "translate(-50%, -50%) scale(0.8)";
   }, 100);
 
   setTimeout(() => {
