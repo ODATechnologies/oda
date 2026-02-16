@@ -20,54 +20,29 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ===== Intro Animation ===== */
-
-.intro {
+/* ===== Splash ===== */
+.splash {
   position: fixed;
   inset: 0;
-  background: #000;
-  z-index: 5000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.8s ease;
-}
-
-.intro.white {
   background: #fff;
+  z-index: 3000;
 }
 
-.intro-logo {
-  width: 180px;
+.splash-logo {
+  position: absolute;
+  height: 60px;
   opacity: 0;
-  transform: scale(0.9);
-  transition: 1s ease;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: all 1.2s ease;
 }
 
-.intro.show .intro-logo {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.intro.move .intro-logo {
-  position: fixed;
-  top: 17px;
-  left: 14px;
-  width: 110px;
-  transition: 0.8s ease;
-}
-
-.fade-ui {
+/* ===== App Fade ===== */
+.app {
   opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-.fade-ui.show {
-  opacity: 1;
+  transition: opacity 1s ease;
 }
 
 /* ===== Header ===== */
-
 .header {
   position: fixed;
   top: 0;
@@ -91,19 +66,32 @@ html, body {
 }
 
 .icon-btn {
-  width: 26px;
-  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
 .icon-btn svg {
-  width: 100%;
-  height: 100%;
-  stroke: #000;
+  width: 22px;
+  height: 22px;
+}
+
+.video-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.video-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* ===== Language Select ===== */
-
 .lang-select {
   min-height: 100vh;
   padding-top: var(--header-h);
@@ -131,6 +119,7 @@ html, body {
 .lang .title {
   font-size: 22px;
   font-weight: 800;
+  letter-spacing: 0.6px;
 }
 
 .lang .sub {
@@ -140,7 +129,6 @@ html, body {
 }
 
 /* ===== Center Guide ===== */
-
 .center-guide {
   position: absolute;
   top: 50%;
@@ -150,18 +138,29 @@ html, body {
   pointer-events: none;
 }
 
+.center-guide::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+}
+
 .center-guide span {
+  position: relative;
   display: inline-block;
   padding: 8px 18px;
   font-size: 13px;
   color: #fff;
   background: rgba(0,0,0,0.7);
   border-radius: 20px;
+  line-height: 1.4;
   animation: blink 1.4s infinite;
 }
 
 /* ===== Bottom CTA ===== */
-
 .bottom-cta {
   position: fixed;
   bottom: 16px;
@@ -170,35 +169,36 @@ html, body {
   width: 70%;
   max-width: 360px;
   height: 52px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-
   font-size: 15px;
   font-weight: 700;
-  line-height: 1.25;
   color: #fff;
   text-decoration: none;
-
   border-radius: 20px;
   background: linear-gradient(120deg,#e86f00,#ff9a2f,#EB4C00);
   background-size: 200% 100%;
   animation: ctaFlow 6s ease-in-out infinite;
-
   box-shadow: 0 6px 18px rgba(232,111,0,0.55);
   z-index: 900;
 }
 
 .bottom-cta .cta-sub {
   font-size: 13px;
+  font-weight: 600;
   margin-top: 2px;
 }
 
-/* ===== Slider ===== */
+@keyframes ctaFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
+/* ===== Slider ===== */
 .slider-container {
   display: none;
   padding-top: var(--header-h);
@@ -247,22 +247,15 @@ html, body {
   50% { opacity: 0.3; }
 }
 
-@keyframes ctaFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 /* ===== Modal ===== */
-
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3000;
+  z-index: 4000;
   opacity: 0;
   pointer-events: none;
   transition: 0.3s;
@@ -282,44 +275,72 @@ html, body {
 }
 
 .modal-btn {
-  margin-top: 10px;
+  display: block;
+  margin: 8px 0;
   padding: 10px;
   border-radius: 8px;
   background: #111;
   color: #fff;
+  text-decoration: none;
+  font-weight: 600;
   cursor: pointer;
+}
+
+.modal-close {
+  margin-top: 10px;
+  cursor: pointer;
+  color: #666;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Intro -->
-<div class="intro" id="intro">
-  <img src="odalogo_new20220221(가로).png" class="intro-logo" id="introLogo">
+<!-- Splash -->
+<div class="splash" id="splash">
+  <img src="odalogo_new20220221(가로).png" id="splashLogo" class="splash-logo">
 </div>
 
-<div class="fade-ui" id="mainUI">
+<div class="app" id="app">
 
 <!-- Header -->
 <div class="header">
-  <img src="odalogo_new20220221(가로).png" class="logo">
+  <img src="odalogo_new20220221(가로).png" class="logo" id="headerLogo">
 
   <div class="header-right">
 
     <!-- 소개영상 -->
-    <div class="icon-btn" onclick="openVideoModal()">
-      🎬
+    <div class="video-btn" onclick="openVideoModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+        <rect x="3" y="5" width="15" height="14" rx="2"/>
+        <polygon points="10,9 15,12 10,15" fill="black"/>
+      </svg>
+      소개영상
     </div>
 
     <!-- 홈페이지 -->
     <a href="https://www.odacore.com/main" target="_blank" class="icon-btn">
-      🌐
+      <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>
+      </svg>
     </a>
 
     <!-- 전화 -->
     <div class="icon-btn" onclick="openCallModal()">
-      📞
+      <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+        19.8 19.8 0 0 1-8.63-3.07
+        19.5 19.5 0 0 1-6-6
+        19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3
+        a2 2 0 0 1 2 1.72
+        12.8 12.8 0 0 0 .7 2.81
+        2 2 0 0 1-.45 2.11L8.09 9.91
+        a16 16 0 0 0 6 6l1.27-1.27
+        a2 2 0 0 1 2.11-.45
+        12.8 12.8 0 0 0 2.81.7
+        A2 2 0 0 1 22 16.92z"/>
+      </svg>
     </div>
 
   </div>
@@ -338,7 +359,10 @@ html, body {
   </div>
 
   <div class="center-guide">
-    <span>선택해주세요<br>Please select</span>
+    <span>
+      선택해주세요<br>
+      Please select
+    </span>
   </div>
 </div>
 
@@ -363,51 +387,56 @@ html, body {
 <!-- Video Modal -->
 <div class="modal" id="videoModal">
   <div class="modal-box">
-    <h3>소개 영상</h3>
-    <div class="modal-btn" onclick="playVideo('oda/int/kor.mp4')">KOR Ver</div>
-    <div class="modal-btn" onclick="playVideo('oda/int/eng.mp4')">ENG Ver</div>
-    <div style="margin-top:10px;cursor:pointer" onclick="closeVideoModal()">닫기</div>
+    <h3>소개 영상 선택</h3>
+    <a href="oda/int/kor.mp4" target="_blank" class="modal-btn">KOR Ver</a>
+    <a href="oda/int/eng.mp4" target="_blank" class="modal-btn">ENG Ver</a>
+    <div class="modal-close" onclick="closeVideoModal()">닫기</div>
   </div>
 </div>
 
 <!-- Call Modal -->
 <div class="modal" id="callModal">
   <div class="modal-box">
-    <h3>1800-8644</h3>
-    <div class="modal-btn" onclick="location.href='tel:18008644'">전화 걸기</div>
-    <div style="margin-top:10px;cursor:pointer" onclick="closeCallModal()">취소</div>
+    <h3>1800-8644 로 전화하시겠습니까?</h3>
+    <div class="modal-btn" onclick="closeCallModal()">취소</div>
+    <a href="tel:18008644" class="modal-btn">전화걸기</a>
   </div>
 </div>
 
 <script>
-/* ===== First Visit Animation ===== */
+/* Splash Animation */
+window.addEventListener("load", () => {
 
-const intro = document.getElementById("intro");
-const mainUI = document.getElementById("mainUI");
+  const splash = document.getElementById("splash");
+  const logo = document.getElementById("splashLogo");
+  const headerLogo = document.getElementById("headerLogo");
+  const app = document.getElementById("app");
 
-if (!localStorage.getItem("visited")) {
+  logo.style.top = "50%";
+  logo.style.left = "50%";
 
-  setTimeout(()=> intro.classList.add("white"), 400);
-  setTimeout(()=> intro.classList.add("show"), 900);
-  setTimeout(()=> intro.classList.add("move"), 1800);
+  setTimeout(() => {
+    logo.style.opacity = "1";
+    logo.style.transform = "translate(-50%, -50%) scale(1)";
+  }, 100);
 
-  setTimeout(()=>{
-    mainUI.classList.add("show");
-  }, 2300);
+  setTimeout(() => {
+    const rect = headerLogo.getBoundingClientRect();
 
-  setTimeout(()=>{
-    intro.style.display = "none";
+    logo.style.top = rect.top + rect.height/2 + "px";
+    logo.style.left = rect.left + rect.width/2 + "px";
+    logo.style.transform = "translate(-50%, -50%) scale(0.4)";
   }, 3000);
 
-  localStorage.setItem("visited", "true");
+  setTimeout(() => {
+    app.style.opacity = "1";
+    splash.style.opacity = "0";
+    setTimeout(()=> splash.style.display="none",1000);
+  }, 4200);
 
-} else {
-  intro.style.display = "none";
-  mainUI.classList.add("show");
-}
+});
 
-/* ===== Catalog ===== */
-
+/* Catalog */
 const total = 44;
 let index = 0;
 let startX = 0;
@@ -445,16 +474,21 @@ document.addEventListener("touchend", e => {
   update();
 });
 
-/* ===== Video ===== */
+/* Video Modal */
+function openVideoModal() {
+  document.getElementById("videoModal").classList.add("active");
+}
+function closeVideoModal() {
+  document.getElementById("videoModal").classList.remove("active");
+}
 
-function openVideoModal(){ document.getElementById("videoModal").classList.add("active"); }
-function closeVideoModal(){ document.getElementById("videoModal").classList.remove("active"); }
-function playVideo(src){ window.open(src, "_blank"); }
-
-/* ===== Call ===== */
-
-function openCallModal(){ document.getElementById("callModal").classList.add("active"); }
-function closeCallModal(){ document.getElementById("callModal").classList.remove("active"); }
+/* Call Modal */
+function openCallModal() {
+  document.getElementById("callModal").classList.add("active");
+}
+function closeCallModal() {
+  document.getElementById("callModal").classList.remove("active");
+}
 </script>
 
 </body>
