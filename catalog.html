@@ -16,31 +16,30 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #000;
+  background: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ===== Splash Screen ✔ ===== */
+/* ===== Splash (화이트) ===== */
 .splash {
   position: fixed;
   inset: 0;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  background: #fff;
+  z-index: 3000;
 }
 
 .splash-logo {
   position: absolute;
   height: 60px;
   opacity: 0;
-  transform: scale(0.9);
-  transition:
-    opacity 1.5s ease,
-    transform 1.5s ease,
-    top 1s ease,
-    left 1s ease;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: all 1.2s ease;
+}
+
+/* ===== 앱 전체 처음 숨김 ===== */
+.app {
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 /* ===== Header ===== */
@@ -103,45 +102,12 @@ html, body {
 .lang .title {
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: 0.6px;
 }
 
 .lang .sub {
   margin-top: 8px;
   font-size: 13px;
   color: #aaa;
-}
-
-/* ===== Center Guide ===== */
-.center-guide {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-}
-
-.center-guide::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  right: 5%;
-  height: 1px;
-  background: rgba(255,255,255,0.25);
-}
-
-.center-guide span {
-  position: relative;
-  display: inline-block;
-  padding: 8px 18px;
-  font-size: 13px;
-  color: #fff;
-  background: rgba(0,0,0,0.7);
-  border-radius: 20px;
-  line-height: 1.4;
-  animation: blink 1.4s infinite;
 }
 
 /* ===== Bottom CTA ===== */
@@ -162,35 +128,17 @@ html, body {
 
   font-size: 15px;
   font-weight: 700;
-  line-height: 1.25;
   color: #fff;
   text-decoration: none;
 
   border-radius: 20px;
-  background: linear-gradient(
-    120deg,
-    #e86f00 0%,
-    #ff9a2f 50%,
-    #EB4C00 100%
-  );
+  background: linear-gradient(120deg,#e86f00,#ff9a2f,#EB4C00);
   background-size: 200% 100%;
   animation: ctaFlow 6s ease-in-out infinite;
 
   box-shadow: 0 6px 18px rgba(232,111,0,0.55);
-  z-index: 900;
 }
 
-.bottom-cta:active {
-  transform: translateX(-50%) scale(0.97);
-}
-
-.bottom-cta .cta-sub {
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 2px;
-  letter-spacing: 0.2px;
-}
-  
 @keyframes ctaFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -250,84 +198,93 @@ html, body {
 
 <body>
 
-<!-- Splash Screen ✔ -->
+<!-- Splash -->
 <div class="splash" id="splash">
-  <img src="odalogo_new20220221(가로).png" class="splash-logo" id="splashLogo">
+  <img src="odalogo_new20220221(가로).png" id="splashLogo" class="splash-logo">
 </div>
 
-<!-- Header -->
-<div class="header">
-  <img src="odalogo_new20220221(가로).png" class="logo" id="headerLogo">
-  <div class="header-right">
-    <a href="https://www.odacore.com/main" target="_blank" class="home-link">🌐 홈페이지</a>
-    <a href="tel:18008644" class="phone">📞1800-8644</a>
+<!-- 실제 앱 -->
+<div class="app" id="app">
+
+  <div class="header">
+    <img src="odalogo_new20220221(가로).png" class="logo" id="headerLogo">
+    <div class="header-right">
+      <a href="https://www.odacore.com/main" target="_blank" class="home-link">🌐 홈페이지</a>
+      <a href="tel:18008644" class="phone">📞1800-8644</a>
+    </div>
   </div>
+
+  <div class="lang-select" id="langSelect">
+    <div class="lang kor" onclick="loadCatalog('kor')">
+      <div class="title">국문 카탈로그</div>
+      <div class="sub">KOREAN CATALOG</div>
+    </div>
+
+    <div class="lang eng" onclick="loadCatalog('eng')">
+      <div class="title">ENGLISH CATALOG</div>
+      <div class="sub">영문 카탈로그</div>
+    </div>
+  </div>
+
+  <div class="slider-container" id="sliderContainer">
+    <div class="slider" id="slider"></div>
+  </div>
+
+  <div class="swipe-guide" id="swipeGuide">← 좌우로 움직여주세요 →</div>
+  <div class="page-indicator" id="indicator">1 / 44</div>
+
+  <a class="bottom-cta"
+     href="https://forms.gle/JdcosiosWY13QEAN6"
+     target="_blank">
+    제품 상담 · 견적 문의<br>
+    <span style="font-size:13px;">Quote Request</span>
+  </a>
+
 </div>
-
-<!-- Language Select -->
-<div class="lang-select" id="langSelect">
-  <div class="lang kor" onclick="loadCatalog('kor')">
-    <div class="title">국문 카탈로그</div>
-    <div class="sub">KOREAN CATALOG</div>
-  </div>
-
-  <div class="lang eng" onclick="loadCatalog('eng')">
-    <div class="title">ENGLISH CATALOG</div>
-    <div class="sub">영문 카탈로그</div>
-  </div>
-
-  <div class="center-guide">
-    <span>
-      선택해주세요<br>
-      Please select
-    </span>
-  </div>
-</div>
-
-<!-- Slider -->
-<div class="slider-container" id="sliderContainer">
-  <div class="slider" id="slider"></div>
-</div>
-
-<div class="swipe-guide" id="swipeGuide">← 좌우로 움직여주세요 →</div>
-<div class="page-indicator" id="indicator">1 / 44</div>
-
-<!-- Bottom CTA -->
-<a
-  class="bottom-cta"
-  href="https://forms.gle/JdcosiosWY13QEAN6"
-  target="_blank"
->
-  제품 상담 · 견적 문의<br>
-  <span class="cta-sub">Quote Request</span>
-</a>
 
 <script>
-/* ===== Splash Animation ✔ ===== */
+/* ===== Splash Animation ===== */
 window.addEventListener("load", () => {
+
   const splash = document.getElementById("splash");
   const logo = document.getElementById("splashLogo");
   const headerLogo = document.getElementById("headerLogo");
+  const app = document.getElementById("app");
 
-  // 가운데 표시
+  // 중앙 위치
   logo.style.top = "50%";
   logo.style.left = "50%";
-  logo.style.transform = "translate(-50%, -50%) scale(1)";
-  logo.style.opacity = "1";
 
   setTimeout(() => {
-    // 헤더 위치로 이동
+    logo.style.opacity = "1";
+    logo.style.transform = "translate(-50%, -50%) scale(1)";
+  }, 100);
+
+  // 3초 후 헤더 위치로 이동
+  setTimeout(() => {
+
     const rect = headerLogo.getBoundingClientRect();
+
     logo.style.top = rect.top + rect.height/2 + "px";
     logo.style.left = rect.left + rect.width/2 + "px";
     logo.style.transform = "translate(-50%, -50%) scale(0.4)";
+
   }, 3000);
 
+  // 이동 완료 후 UI 페이드 인
   setTimeout(() => {
-    splash.style.display = "none";
+
+    app.style.opacity = "1";
+    splash.style.opacity = "0";
+
+    setTimeout(() => splash.style.display = "none", 1000);
+
   }, 4200);
+
 });
 
+
+/* ===== 기존 기능 ===== */
 
 const total = 44;
 let index = 0;
