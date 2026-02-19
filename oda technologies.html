@@ -47,6 +47,35 @@ z-index:1000;
 header img{
 height:20px;
 }
+.header-right{
+position:absolute;
+right:16px;
+top:50%;
+transform:translateY(-50%);
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.header-icon{
+width:34px;
+height:34px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.header-icon:hover{
+background:#f2f2f2;
+}
+
+.header-icon i{
+width:18px;
+height:18px;
+}
 
 /* ================= HERO ================= */
 
@@ -340,7 +369,22 @@ color:#888;
 <body>
 
 <header>
+
 <img src="odalogo_new20220221(가로).png">
+
+<div class="header-right">
+
+<a href="https://www.odacore.com/main"
+target="_blank"
+class="header-icon"
+title="ODA Core Website">
+
+<i data-lucide="globe"></i>
+
+</a>
+
+</div>
+
 </header>
 
 <section class="hero">
