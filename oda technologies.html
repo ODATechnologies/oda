@@ -28,7 +28,7 @@ color:#111;
 overflow-x:hidden;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 header{
 position:fixed;
@@ -44,8 +44,9 @@ border-bottom:1px solid #eee;
 z-index:1000;
 }
 
-header img{ height:20px; }
-
+header img{
+height:20px;
+}
 .header-right{
 position:absolute;
 right:16px;
@@ -67,14 +68,16 @@ cursor:pointer;
 transition:0.2s;
 }
 
-.header-icon:hover{ background:#f2f2f2; }
+.header-icon:hover{
+background:#f2f2f2;
+}
 
 .header-icon i{
 width:18px;
 height:18px;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
 .hero{
 padding-top:90px;
@@ -99,17 +102,32 @@ animation:shine 4s linear infinite;
 100%{background-position:200% center;}
 }
 
-/* VIDEO */
+/* ================= VIDEO ================= */
 
 .video{
 padding:0 20px;
 margin-top:20px;
 }
 
+.video-wrap{
+position:relative;
+}
+
 .video video{
 width:100%;
 border-radius:14px;
-cursor:pointer;
+}
+
+.sound-indicator{
+position:absolute;
+bottom:10px;
+right:10px;
+background:rgba(0,0,0,0.6);
+color:#fff;
+padding:6px 10px;
+border-radius:12px;
+font-size:13px;
+pointer-events:none;
 }
 
 .video-toggle{
@@ -133,10 +151,10 @@ background:#111;
 color:#fff;
 }
 
-/* UPCOMING */
+/* ================= UPCOMING PRODUCT ================= */
 
 .upcoming{
-margin:20px;
+margin:20px 20px;
 padding:18px;
 border-radius:16px;
 border:1px solid #eee;
@@ -156,7 +174,7 @@ color:#666;
 line-height:1.5;
 }
 
-/* BX */
+/* ================= BX ================= */
 
 .bx{
 margin:10px 0 30px;
@@ -170,7 +188,7 @@ border-radius:18px;
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* CATALOG */
+/* ================= CATALOG ================= */
 
 .catalog{
 padding:50px 20px;
@@ -184,6 +202,7 @@ font-weight:800;
 font-size:18px;
 margin-bottom:30px;
 letter-spacing:1px;
+width:100%;
 }
 
 .lang-select{
@@ -204,8 +223,15 @@ background:#fafafa;
 transition:0.3s;
 }
 
+.lang:hover{
+background:#f0f0f0;
+}
+
 .lang.kor{background:#030405;}
-.lang.eng{background:#1a1c1e;}
+.lang.eng{
+background:#1a1c1e;
+border-top:1px solid #eee;
+}
 
 .lang .title{
 font-size:20px;
@@ -219,7 +245,7 @@ margin-top:6px;
 color:#ccc;
 }
 
-/* center guide */
+/* 가운데 가이드 */
 
 .center-guide{
 position:absolute;
@@ -231,11 +257,25 @@ pointer-events:none;
 transform:translateY(-50%);
 }
 
+.center-guide::before{
+content:"";
+position:absolute;
+top:50%;
+left:10%;
+right:10%;
+height:1px;
+background:#ddd;
+}
+
 .center-guide span{
+position:relative;
+display:inline-block;
 background:#fff;
 padding:8px 18px;
 border-radius:20px;
 font-size:13px;
+line-height:1.4;
+color:#111;
 animation:blink 1.4s infinite;
 }
 
@@ -244,7 +284,7 @@ animation:blink 1.4s infinite;
 50%{opacity:0.3;}
 }
 
-/* SLIDER */
+/* ================= SLIDER ================= */
 
 #sliderContainer{
 display:none;
@@ -253,6 +293,7 @@ inset:0;
 background:#000;
 z-index:3000;
 overflow:hidden;
+padding-bottom:env(safe-area-inset-bottom);
 }
 
 #slider{
@@ -266,31 +307,31 @@ width:100vw;
 height:calc(100vh - 60px);
 object-fit:contain;
 flex-shrink:0;
+padding-bottom:env(safe-area-inset-bottom);
 }
 
-/* gesture guide */
+/* SWIPE GUIDE */
 
-#gestureGuide{
+.swipe-guide{
 position:fixed;
-bottom:80px;
+bottom:60px;
 left:50%;
 transform:translateX(-50%);
 background:rgba(0,0,0,0.6);
 color:#fff;
-padding:10px 18px;
+padding:8px 16px;
 border-radius:20px;
 font-size:13px;
-z-index:5000;
-animation:blink 1.2s infinite;
-pointer-events:none;
+z-index:4000;
+animation:blink 1s infinite;
 display:none;
 }
 
-/* close */
+/* 닫기 버튼 */
 
 .close-btn{
 position:fixed;
-top:20px;
+top:calc(12px + env(safe-area-inset-top));
 right:12px;
 background:rgba(0,0,0,0.6);
 color:#fff;
@@ -301,7 +342,7 @@ font-size:13px;
 z-index:4000;
 }
 
-/* indicator */
+/* 인디케이터 */
 
 #indicator{
 position:fixed;
@@ -316,7 +357,7 @@ display:none;
 z-index:4000;
 }
 
-/* FLOAT */
+/* FLOAT BUTTON */
 
 .float-btn{
 position:fixed;
@@ -330,6 +371,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 background:linear-gradient(135deg,#ff8a00,#ff6a00);
 color:#fff;
 border-radius:18px;
@@ -344,6 +386,8 @@ font-size:13px;
 opacity:0.9;
 margin-top:2px;
 }
+
+/* FOOTER */
 
 footer{
 padding:40px 20px 100px;
@@ -362,9 +406,16 @@ color:#888;
 <img src="odalogo_new20220221(가로).png">
 
 <div class="header-right">
-<a href="https://www.odacore.com/main" target="_blank" class="header-icon">
+
+<a href="https://www.odacore.com/main"
+target="_blank"
+class="header-icon"
+title="ODA Core Website">
+
 <i data-lucide="globe"></i>
+
 </a>
+
 </div>
 
 </header>
@@ -375,9 +426,13 @@ color:#888;
 
 <section class="video">
 
+<div class="video-wrap">
 <video id="mainVideo"
 src="https://odatechnologies.github.io/oda/int/kor.mp4"
 autoplay muted loop playsinline></video>
+
+<div id="soundIndicator" class="sound-indicator">🔇</div>
+</div>
 
 <div class="video-toggle">
 <button class="active" onclick="changeVideo('kor',this)">KOR</button>
@@ -400,7 +455,9 @@ autoplay muted loop playsinline></video>
 
 <section class="catalog">
 
-<div class="catalog-title">PRODUCT CATALOG</div>
+<div class="catalog-title">
+PRODUCT CATALOG
+</div>
 
 <div class="lang-select">
 
@@ -415,14 +472,17 @@ autoplay muted loop playsinline></video>
 </div>
 
 <div class="center-guide">
-<span>선택해주세요<br>Please select</span>
+<span>
+선택해주세요<br>
+Please select
+</span>
 </div>
 
 </div>
+
 </section>
 
 <!-- SLIDER -->
-
 <div id="sliderContainer">
 
 <button class="close-btn" onclick="closeCatalog()">닫기 ✕</button>
@@ -431,7 +491,7 @@ autoplay muted loop playsinline></video>
 
 <div id="indicator">1 / 44</div>
 
-<div id="gestureGuide">👉 좌우로 넘겨보세요</div>
+<div id="swipeGuide" class="swipe-guide"><- SWIPE -></div>
 
 </div>
 
@@ -442,13 +502,15 @@ target="_blank">
 <span>Quote Request</span>
 </a>
 
-<footer>© ODA Technologies</footer>
+<footer>
+© ODA Technologies
+</footer>
 
 <script>
 
 lucide.createIcons();
 
-/* video language */
+/* video language change */
 
 function changeVideo(lang,btn){
 
@@ -462,20 +524,20 @@ document.querySelectorAll(".video-toggle button")
 .forEach(b=>b.classList.remove("active"));
 
 btn.classList.add("active");
+
+video.muted=true;
+document.getElementById("soundIndicator").textContent="🔇";
 }
 
 /* video sound toggle */
 
-const mainVideo = document.getElementById("mainVideo");
+const videoEl = document.getElementById("mainVideo");
+const soundIndicator = document.getElementById("soundIndicator");
 
-mainVideo.addEventListener("click", () => {
+videoEl.addEventListener("click",()=>{
 
-if(mainVideo.muted){
-mainVideo.muted = false;
-mainVideo.play();
-}else{
-mainVideo.muted = true;
-}
+videoEl.muted = !videoEl.muted;
+soundIndicator.textContent = videoEl.muted ? "🔇" : "🔊";
 
 });
 
@@ -488,6 +550,7 @@ let startX = 0;
 function openCatalog(lang){
 
 document.body.style.overflow="hidden";
+
 document.querySelector(".float-btn").style.display="none";
 
 document.getElementById("sliderContainer").style.display="block";
@@ -507,17 +570,26 @@ slider.appendChild(img);
 }
 
 update();
-showGuide();
+
+/* swipe guide 표시 */
+
+const guide=document.getElementById("swipeGuide");
+guide.style.display="block";
+
+setTimeout(()=>{
+guide.style.display="none";
+},2500);
+
 }
 
 function closeCatalog(){
 
 document.body.style.overflow="auto";
+
 document.querySelector(".float-btn").style.display="flex";
 
 document.getElementById("sliderContainer").style.display="none";
 document.getElementById("indicator").style.display="none";
-document.getElementById("gestureGuide").style.display="none";
 }
 
 function update(){
@@ -529,30 +601,7 @@ slider.style.transform=`translateX(-${index*w}px)`;
 
 document.getElementById("indicator").textContent=
 `${index+1} / ${total}`;
-
-/* 첫 슬라이드가 아니면 가이드 숨김 */
-
-if(index!==0){
-document.getElementById("gestureGuide").style.display="none";
 }
-}
-
-/* gesture guide */
-
-function showGuide(){
-
-const guide=document.getElementById("gestureGuide");
-
-guide.style.display="block";
-
-setTimeout(()=>{
-if(index===0){
-guide.style.display="none";
-}
-},3000);
-}
-
-/* swipe */
 
 document.addEventListener("touchstart",e=>{
 startX=e.touches[0].clientX;
