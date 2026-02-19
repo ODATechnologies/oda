@@ -15,7 +15,6 @@
 --header-h:52px;
 }
 
-/* 기본 */
 *{
 margin:0;
 padding:0;
@@ -29,7 +28,12 @@ color:#111;
 overflow-x:hidden;
 }
 
-/* INTRO */
+body.lock{
+overflow:hidden;
+}
+
+/* ================= INTRO ================= */
+
 #intro{
 position:fixed;
 inset:0;
@@ -38,25 +42,18 @@ display:flex;
 align-items:center;
 justify-content:center;
 z-index:9999;
-transition:all 0.8s ease;
 }
 
 #intro img{
-width:180px;
+position:absolute;
+height:60px;
 opacity:0;
-animation:fadeIn 1s forwards;
+transform:translate(-50%,-50%) scale(0.8);
+transition:all 1.2s ease;
 }
 
-@keyframes fadeIn{
-to{opacity:1;}
-}
+/* ================= HEADER ================= */
 
-#intro.hide{
-opacity:0;
-pointer-events:none;
-}
-
-/* HEADER */
 header{
 position:fixed;
 top:0;
@@ -82,42 +79,46 @@ top:50%;
 transform:translateY(-50%);
 }
 
-.header-right a{
-color:#111;
-display:flex;
-align-items:center;
-}
+/* ================= HERO ================= */
 
-/* HERO */
 .hero{
 padding-top:90px;
 text-align:center;
 padding-bottom:30px;
+opacity:0;
+transition:opacity 0.8s;
+}
+
+.hero.show{
+opacity:1;
 }
 
 .hero h1{
 font-size:18px;
 font-weight:800;
-white-space:nowrap;
-overflow:hidden;
-
 background:linear-gradient(90deg,#111,#eb4c00,#111);
 background-size:200% auto;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-
 animation:shine 4s linear infinite;
 }
 
 @keyframes shine{
-0%{background-position:0% center;}
-100%{background-position:200% center;}
+0%{background-position:0%}
+100%{background-position:200%}
 }
 
-/* VIDEO */
+/* ================= VIDEO ================= */
+
 .video{
 padding:0 20px;
 margin-top:20px;
+opacity:0;
+transition:opacity 0.8s;
+}
+
+.video.show{
+opacity:1;
 }
 
 .video video{
@@ -145,11 +146,18 @@ background:#111;
 color:#fff;
 }
 
-/* BX */
+/* ================= BX ================= */
+
 .bx{
 margin:30px 0;
 display:flex;
 justify-content:center;
+opacity:0;
+transition:opacity 0.8s;
+}
+
+.bx.show{
+opacity:1;
 }
 
 .bx img{
@@ -158,21 +166,23 @@ border-radius:18px;
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* ================= CATALOG UI ================= */
+/* ================= CATALOG ================= */
 
 .catalog{
 padding:40px 20px;
 background:#fff;
-display:flex;
-flex-direction:column;
-gap:0;
+opacity:0;
+transition:opacity 0.8s;
+}
+
+.catalog.show{
+opacity:1;
 }
 
 .lang-select{
 position:relative;
 border-radius:18px;
 overflow:hidden;
-border:1px solid #eee;
 }
 
 .lang{
@@ -182,16 +192,16 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 cursor:pointer;
-background:#fafafa;
-transition:0.3s;
+color:#fff;
 }
 
-.lang:hover{
-background:#f0f0f0;
+.lang.kor{
+background:#030405;
 }
 
 .lang.eng{
-border-top:1px solid #eee;
+background:#1a1c1e;
+border-top:1px solid rgba(255,255,255,0.1);
 }
 
 .lang .title{
@@ -202,10 +212,11 @@ font-weight:800;
 .lang .sub{
 font-size:13px;
 margin-top:6px;
-color:#666;
+opacity:0.8;
 }
 
-/* 가운데 선택 가이드 */
+/* 선택 가이드 */
+
 .center-guide{
 position:absolute;
 top:50%;
@@ -223,18 +234,18 @@ top:50%;
 left:10%;
 right:10%;
 height:1px;
-background:#ddd;
+background:rgba(255,255,255,0.3);
 }
 
 .center-guide span{
 position:relative;
 display:inline-block;
-background:#fff;
+background:rgba(0,0,0,0.7);
 padding:8px 18px;
 border-radius:20px;
 font-size:13px;
 line-height:1.4;
-color:#111;
+color:#fff;
 animation:blink 1.4s infinite;
 }
 
@@ -250,8 +261,21 @@ display:none;
 position:fixed;
 inset:0;
 background:#000;
-z-index:2000;
+z-index:3000;
 padding-top:var(--header-h);
+}
+
+.slider-close{
+position:fixed;
+top:14px;
+right:16px;
+z-index:4000;
+background:rgba(0,0,0,0.6);
+border:none;
+color:#fff;
+padding:8px;
+border-radius:10px;
+cursor:pointer;
 }
 
 #slider{
@@ -268,7 +292,7 @@ flex-shrink:0;
 
 #indicator{
 position:fixed;
-bottom:90px;
+bottom:30px;
 right:16px;
 background:rgba(0,0,0,0.6);
 color:#fff;
@@ -278,7 +302,8 @@ font-size:13px;
 display:none;
 }
 
-/* FLOAT BUTTON — 크기 확대 */
+/* ================= FLOAT ================= */
+
 .float-btn{
 position:fixed;
 bottom:20px;
@@ -301,13 +326,16 @@ z-index:1500;
 text-decoration:none;
 }
 
+.float-btn.hide{
+display:none;
+}
+
 .float-btn span{
 font-size:13px;
 opacity:0.9;
 margin-top:2px;
 }
 
-/* FOOTER */
 footer{
 padding:40px 20px 100px;
 text-align:center;
@@ -318,21 +346,19 @@ color:#888;
 </style>
 </head>
 
-<body>
+<body class="lock">
 
 <!-- INTRO -->
 <div id="intro">
-<img src="odalogo_new20220221(가로).png">
+<img src="odalogo_new20220221(가로).png" id="introLogo">
 </div>
 
 <!-- HEADER -->
 <header>
-<img src="odalogo_new20220221(가로).png">
+<img src="odalogo_new20220221(가로).png" id="headerLogo">
 
 <div class="header-right">
-<a href="https://www.odacore.com/main" target="_blank">
 <i data-lucide="globe"></i>
-</a>
 </div>
 </header>
 
@@ -343,7 +369,6 @@ color:#888;
 
 <!-- VIDEO -->
 <section class="video">
-
 <video id="mainVideo"
 src="https://odatechnologies.github.io/oda/int/kor.mp4"
 autoplay muted loop playsinline></video>
@@ -352,7 +377,6 @@ autoplay muted loop playsinline></video>
 <button class="active" onclick="changeVideo('kor',this)">KOR</button>
 <button onclick="changeVideo('eng',this)">ENG</button>
 </div>
-
 </section>
 
 <!-- BX -->
@@ -362,7 +386,6 @@ autoplay muted loop playsinline></video>
 
 <!-- CATALOG -->
 <section class="catalog">
-
 <div class="lang-select">
 
 <div class="lang kor" onclick="openCatalog('kor')">
@@ -376,46 +399,83 @@ autoplay muted loop playsinline></video>
 </div>
 
 <div class="center-guide">
-<span>
-선택해주세요<br>
-Please select
-</span>
+<span>선택해주세요<br>Please select</span>
 </div>
 
 </div>
-
 </section>
 
 <!-- SLIDER -->
 <div id="sliderContainer">
+
+<button class="slider-close" onclick="closeCatalog()">
+<i data-lucide="x"></i>
+</button>
+
 <div id="slider"></div>
 <div id="indicator">1 / 44</div>
+
 </div>
 
 <!-- FLOAT -->
 <a class="float-btn"
 href="https://forms.gle/JdcosiosWY13QEAN6"
-target="_blank">
+target="_blank"
+id="floatBtn">
 제품 상담 · 견적 문의
 <span>Quote Request</span>
 </a>
 
-<footer>
-© ODA Technologies
-</footer>
+<footer>© ODA Technologies</footer>
 
 <script>
 
 lucide.createIcons();
 
-/* intro */
+/* ================= INTRO ANIMATION ================= */
+
 window.addEventListener("load",()=>{
+
+const introLogo=document.getElementById("introLogo");
+const headerLogo=document.getElementById("headerLogo");
+const intro=document.getElementById("intro");
+
+introLogo.style.top="50%";
+introLogo.style.left="50%";
+
 setTimeout(()=>{
-document.getElementById("intro").classList.add("hide");
-},1500);
+introLogo.style.opacity="1";
+},100);
+
+/* 1초 유지 후 이동 */
+setTimeout(()=>{
+
+const rect=headerLogo.getBoundingClientRect();
+
+introLogo.style.top=(rect.top+rect.height/2)+"px";
+introLogo.style.left=(rect.left+rect.width/2)+"px";
+introLogo.style.transform="translate(-50%,-50%) scale(0.35)";
+
+},1200);
+
+/* 바디 밝히기 */
+setTimeout(()=>{
+
+document.querySelectorAll(".hero,.video,.bx,.catalog")
+.forEach(el=>el.classList.add("show"));
+
+document.body.classList.remove("lock");
+
+intro.style.opacity="0";
+
+setTimeout(()=> intro.style.display="none",800);
+
+},2300);
+
 });
 
-/* video */
+/* ================= VIDEO ================= */
+
 function changeVideo(lang,btn){
 
 const video=document.getElementById("mainVideo");
@@ -430,15 +490,19 @@ document.querySelectorAll(".video-toggle button")
 btn.classList.add("active");
 }
 
-/* catalog */
+/* ================= CATALOG ================= */
+
 const total = 44;
 let index = 0;
 let startX = 0;
 
 function openCatalog(lang){
 
+document.body.classList.add("lock");
+
 document.getElementById("sliderContainer").style.display="block";
 document.getElementById("indicator").style.display="block";
+document.getElementById("floatBtn").classList.add("hide");
 
 const slider=document.getElementById("slider");
 slider.innerHTML="";
@@ -447,13 +511,23 @@ index=0;
 for(let i=0;i<total;i++){
 
 const img=document.createElement("img");
-
 img.src=`catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
-
 slider.appendChild(img);
+
 }
 
 update();
+lucide.createIcons();
+}
+
+function closeCatalog(){
+
+document.body.classList.remove("lock");
+
+document.getElementById("sliderContainer").style.display="none";
+document.getElementById("indicator").style.display="none";
+document.getElementById("floatBtn").classList.remove("hide");
+
 }
 
 function update(){
