@@ -28,9 +28,7 @@ color:#111;
 overflow-x:hidden;
 }
 
-body.lock{
-overflow:hidden;
-}
+body.lock{overflow:hidden;}
 
 /* ================= INTRO ================= */
 
@@ -68,9 +66,7 @@ border-bottom:1px solid #eee;
 z-index:1000;
 }
 
-header img{
-height:20px;
-}
+header img{height:20px;}
 
 .header-right{
 position:absolute;
@@ -89,9 +85,7 @@ opacity:0;
 transition:opacity 0.8s;
 }
 
-.hero.show{
-opacity:1;
-}
+.hero.show{opacity:1;}
 
 .hero h1{
 font-size:18px;
@@ -117,9 +111,7 @@ opacity:0;
 transition:opacity 0.8s;
 }
 
-.video.show{
-opacity:1;
-}
+.video.show{opacity:1;}
 
 .video video{
 width:100%;
@@ -156,28 +148,67 @@ opacity:0;
 transition:opacity 0.8s;
 }
 
-.bx.show{
-opacity:1;
+.bx.show{opacity:1;}
+
+.bx-wrap{
+position:relative;
+width:90%;
 }
 
-.bx img{
-width:90%;
+.bx-wrap img{
+width:100%;
 border-radius:18px;
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 안내 문구 */
+
+.bx-notice{
+position:absolute;
+top:12px;
+left:12px;
+right:12px;
+background:rgba(0,0,0,0.65);
+color:#fff;
+padding:10px 14px;
+border-radius:10px;
+font-size:12px;
+line-height:1.5;
+backdrop-filter:blur(4px);
+}
+
+.bx-notice strong{
+display:block;
+font-size:13px;
+margin-bottom:2px;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.section-title{
+padding:0 20px;
+margin-top:20px;
+font-size:16px;
+font-weight:800;
+letter-spacing:0.5px;
+}
+
+.section-divider{
+height:1px;
+background:#eee;
+margin:10px 20px 20px;
 }
 
 /* ================= CATALOG ================= */
 
 .catalog{
-padding:40px 20px;
+padding:0 20px 40px;
 background:#fff;
 opacity:0;
 transition:opacity 0.8s;
 }
 
-.catalog.show{
-opacity:1;
-}
+.catalog.show{opacity:1;}
 
 .lang-select{
 position:relative;
@@ -195,10 +226,7 @@ cursor:pointer;
 color:#fff;
 }
 
-.lang.kor{
-background:#030405;
-}
-
+.lang.kor{background:#030405;}
 .lang.eng{
 background:#1a1c1e;
 border-top:1px solid rgba(255,255,255,0.1);
@@ -244,7 +272,6 @@ background:rgba(0,0,0,0.7);
 padding:8px 18px;
 border-radius:20px;
 font-size:13px;
-line-height:1.4;
 color:#fff;
 animation:blink 1.4s infinite;
 }
@@ -326,9 +353,7 @@ z-index:1500;
 text-decoration:none;
 }
 
-.float-btn.hide{
-display:none;
-}
+.float-btn.hide{display:none;}
 
 .float-btn span{
 font-size:13px;
@@ -356,7 +381,6 @@ color:#888;
 <!-- HEADER -->
 <header>
 <img src="odalogo_new20220221(가로).png" id="headerLogo">
-
 <div class="header-right">
 <i data-lucide="globe"></i>
 </div>
@@ -381,8 +405,21 @@ autoplay muted loop playsinline></video>
 
 <!-- BX -->
 <section class="bx">
+<div class="bx-wrap">
+
+<div class="bx-notice">
+<strong>출시 예정 제품 안내</strong>
+해당 제품은 출시 일정이 확정되지 않았으며 출시 예정입니다.
+</div>
+
 <img src="BX시리즈-QR코드-배너.png">
+
+</div>
 </section>
+
+<!-- CATALOG TITLE -->
+<div class="section-title">PRODUCT CATALOG</div>
+<div class="section-divider"></div>
 
 <!-- CATALOG -->
 <section class="catalog">
@@ -432,7 +469,7 @@ id="floatBtn">
 
 lucide.createIcons();
 
-/* ================= INTRO ANIMATION ================= */
+/* INTRO */
 
 window.addEventListener("load",()=>{
 
@@ -443,11 +480,8 @@ const intro=document.getElementById("intro");
 introLogo.style.top="50%";
 introLogo.style.left="50%";
 
-setTimeout(()=>{
-introLogo.style.opacity="1";
-},100);
+setTimeout(()=> introLogo.style.opacity="1",100);
 
-/* 1초 유지 후 이동 */
 setTimeout(()=>{
 
 const rect=headerLogo.getBoundingClientRect();
@@ -458,7 +492,6 @@ introLogo.style.transform="translate(-50%,-50%) scale(0.35)";
 
 },1200);
 
-/* 바디 밝히기 */
 setTimeout(()=>{
 
 document.querySelectorAll(".hero,.video,.bx,.catalog")
@@ -467,14 +500,13 @@ document.querySelectorAll(".hero,.video,.bx,.catalog")
 document.body.classList.remove("lock");
 
 intro.style.opacity="0";
-
 setTimeout(()=> intro.style.display="none",800);
 
 },2300);
 
 });
 
-/* ================= VIDEO ================= */
+/* VIDEO */
 
 function changeVideo(lang,btn){
 
@@ -490,7 +522,7 @@ document.querySelectorAll(".video-toggle button")
 btn.classList.add("active");
 }
 
-/* ================= CATALOG ================= */
+/* CATALOG */
 
 const total = 44;
 let index = 0;
