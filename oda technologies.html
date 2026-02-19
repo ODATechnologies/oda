@@ -7,12 +7,15 @@
 <title>ODA Technologies</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 
+:root{
+--header-h:52px;
+}
+
+/* 기본 */
 *{
 margin:0;
 padding:0;
@@ -26,8 +29,7 @@ color:#111;
 overflow-x:hidden;
 }
 
-/* ================= INTRO ================= */
-
+/* INTRO */
 #intro{
 position:fixed;
 inset:0;
@@ -54,14 +56,13 @@ opacity:0;
 pointer-events:none;
 }
 
-/* ================= HEADER ================= */
-
+/* HEADER */
 header{
 position:fixed;
 top:0;
 left:0;
 right:0;
-height:52px;
+height:var(--header-h);
 background:#fff;
 display:flex;
 align-items:center;
@@ -87,8 +88,7 @@ display:flex;
 align-items:center;
 }
 
-/* ================= HERO ================= */
-
+/* HERO */
 .hero{
 padding-top:90px;
 text-align:center;
@@ -103,7 +103,6 @@ overflow:hidden;
 
 background:linear-gradient(90deg,#111,#eb4c00,#111);
 background-size:200% auto;
-
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 
@@ -115,8 +114,7 @@ animation:shine 4s linear infinite;
 100%{background-position:200% center;}
 }
 
-/* ================= VIDEO ================= */
-
+/* VIDEO */
 .video{
 padding:0 20px;
 margin-top:20px;
@@ -147,8 +145,7 @@ background:#111;
 color:#fff;
 }
 
-/* ================= BX SLIDE ================= */
-
+/* BX */
 .bx{
 margin:30px 0;
 display:flex;
@@ -161,112 +158,156 @@ border-radius:18px;
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* ================= CATALOG BUTTONS ================= */
+/* ================= CATALOG UI ================= */
 
 .catalog{
 padding:40px 20px;
+background:#fff;
 display:flex;
 flex-direction:column;
-gap:18px;
-background:#030405;
+gap:0;
 }
 
-.catalog button{
-border:none;
-padding:20px 18px;
-border-radius:16px;
-font-weight:600;
+.lang-select{
+position:relative;
+border-radius:18px;
+overflow:hidden;
+border:1px solid #eee;
+}
+
+.lang{
+height:120px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+background:#fafafa;
+transition:0.3s;
+}
+
+.lang:hover{
+background:#f0f0f0;
+}
+
+.lang.eng{
+border-top:1px solid #eee;
+}
+
+.lang .title{
+font-size:20px;
+font-weight:800;
+}
+
+.lang .sub{
+font-size:13px;
+margin-top:6px;
+color:#666;
+}
+
+/* 가운데 선택 가이드 */
+.center-guide{
+position:absolute;
+top:50%;
+left:0;
+width:100%;
 text-align:center;
-font-size:16px;
-line-height:1.5;
-color:#fff;
-background:linear-gradient(135deg,#0c0f11,#030405);
-box-shadow:
-0 4px 12px rgba(0,0,0,0.4),
-inset 0 1px 0 rgba(255,255,255,0.05);
+pointer-events:none;
+transform:translateY(-50%);
 }
 
-.catalog button span{
-display:block;
-font-size:12px;
-opacity:0.7;
-margin-top:4px;
+.center-guide::before{
+content:"";
+position:absolute;
+top:50%;
+left:10%;
+right:10%;
+height:1px;
+background:#ddd;
 }
 
-/* ================= CATALOG SLIDER ================= */
+.center-guide span{
+position:relative;
+display:inline-block;
+background:#fff;
+padding:8px 18px;
+border-radius:20px;
+font-size:13px;
+line-height:1.4;
+color:#111;
+animation:blink 1.4s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:1;}
+50%{opacity:0.3;}
+}
+
+/* ================= SLIDER ================= */
 
 #sliderContainer{
+display:none;
 position:fixed;
 inset:0;
 background:#000;
-z-index:9999;
-display:none;
-flex-direction:column;
-}
-
-.catalog-header{
-padding:14px;
-}
-
-.catalog-header button{
-background:none;
-border:none;
-color:#fff;
-font-size:16px;
-}
-
-.slider-wrap{
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-position:relative;
+z-index:2000;
+padding-top:var(--header-h);
 }
 
 #slider{
 display:flex;
-height:100%;
 transition:transform 0.35s ease;
 }
 
 #slider img{
 width:100vw;
+height:calc(100vh - var(--header-h));
 object-fit:contain;
+flex-shrink:0;
 }
 
 #indicator{
-position:absolute;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
+position:fixed;
+bottom:90px;
+right:16px;
+background:rgba(0,0,0,0.6);
 color:#fff;
-background:rgba(0,0,0,0.5);
-padding:6px 14px;
+padding:6px 12px;
 border-radius:20px;
-font-size:14px;
+font-size:13px;
+display:none;
 }
 
-/* ================= FLOAT BUTTON ================= */
-
+/* FLOAT BUTTON — 크기 확대 */
 .float-btn{
 position:fixed;
 bottom:20px;
 left:50%;
 transform:translateX(-50%);
+width:80%;
+max-width:420px;
+height:56px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
 background:linear-gradient(135deg,#ff8a00,#ff6a00);
 color:#fff;
-padding:16px 28px;
-border-radius:30px;
-font-weight:600;
-text-align:center;
+border-radius:18px;
+font-weight:700;
 box-shadow:0 8px 25px rgba(255,106,0,0.4);
-z-index:1000;
+z-index:1500;
 text-decoration:none;
 }
 
-/* ================= FOOTER ================= */
+.float-btn span{
+font-size:13px;
+opacity:0.9;
+margin-top:2px;
+}
 
+/* FOOTER */
 footer{
 padding:40px 20px 100px;
 text-align:center;
@@ -293,7 +334,6 @@ color:#888;
 <i data-lucide="globe"></i>
 </a>
 </div>
-
 </header>
 
 <!-- HERO -->
@@ -304,7 +344,9 @@ color:#888;
 <!-- VIDEO -->
 <section class="video">
 
-<video id="mainVideo" src="https://odatechnologies.github.io/oda/int/kor.mp4" autoplay muted loop playsinline></video>
+<video id="mainVideo"
+src="https://odatechnologies.github.io/oda/int/kor.mp4"
+autoplay muted loop playsinline></video>
 
 <div class="video-toggle">
 <button class="active" onclick="changeVideo('kor',this)">KOR</button>
@@ -313,7 +355,7 @@ color:#888;
 
 </section>
 
-<!-- BX IMAGE -->
+<!-- BX -->
 <section class="bx">
 <img src="BX시리즈-QR코드-배너.png">
 </section>
@@ -321,38 +363,41 @@ color:#888;
 <!-- CATALOG -->
 <section class="catalog">
 
-<button onclick="openCatalog('kor')">
-국문 카탈로그(KOREAN CATALOG)
-<span>보기</span>
-</button>
+<div class="lang-select">
 
-<button onclick="openCatalog('eng')">
-ENGLISH CATALOG
-<span>VIEW</span>
-</button>
+<div class="lang kor" onclick="openCatalog('kor')">
+<div class="title">국문 카탈로그</div>
+<div class="sub">KOREAN CATALOG</div>
+</div>
+
+<div class="lang eng" onclick="openCatalog('eng')">
+<div class="title">ENGLISH CATALOG</div>
+<div class="sub">영문 카탈로그</div>
+</div>
+
+<div class="center-guide">
+<span>
+선택해주세요<br>
+Please select
+</span>
+</div>
+
+</div>
 
 </section>
 
-<!-- CATALOG VIEWER -->
+<!-- SLIDER -->
 <div id="sliderContainer">
-
-<div class="catalog-header">
-<button onclick="closeCatalog()">← 뒤로가기</button>
-</div>
-
-<div class="slider-wrap">
-
 <div id="slider"></div>
 <div id="indicator">1 / 44</div>
-
 </div>
 
-</div>
-
-<!-- FLOAT BUTTON -->
-<a class="float-btn" href="https://forms.gle/JdcosiosWY13QEAN6" target="_blank">
-제품 상담 · 견적 문의<br>
-<span style="font-size:12px;opacity:0.8">Quote Request</span>
+<!-- FLOAT -->
+<a class="float-btn"
+href="https://forms.gle/JdcosiosWY13QEAN6"
+target="_blank">
+제품 상담 · 견적 문의
+<span>Quote Request</span>
 </a>
 
 <footer>
@@ -361,11 +406,9 @@ ENGLISH CATALOG
 
 <script>
 
-/* lucide icons */
 lucide.createIcons();
 
-/* intro animation */
-
+/* intro */
 window.addEventListener("load",()=>{
 setTimeout(()=>{
 document.getElementById("intro").classList.add("hide");
@@ -373,7 +416,6 @@ document.getElementById("intro").classList.add("hide");
 });
 
 /* video */
-
 function changeVideo(lang,btn){
 
 const video=document.getElementById("mainVideo");
@@ -382,20 +424,21 @@ video.src = lang==="kor"
 ? "https://odatechnologies.github.io/oda/int/kor.mp4"
 : "https://odatechnologies.github.io/oda/int/eng.mp4";
 
-document.querySelectorAll(".video-toggle button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
+document.querySelectorAll(".video-toggle button")
+.forEach(b=>b.classList.remove("active"));
 
+btn.classList.add("active");
 }
 
-/* Catalog */
-
+/* catalog */
 const total = 44;
 let index = 0;
 let startX = 0;
 
 function openCatalog(lang){
 
-document.getElementById("sliderContainer").style.display="flex";
+document.getElementById("sliderContainer").style.display="block";
+document.getElementById("indicator").style.display="block";
 
 const slider=document.getElementById("slider");
 slider.innerHTML="";
@@ -408,23 +451,20 @@ const img=document.createElement("img");
 img.src=`catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
 
 slider.appendChild(img);
-
 }
 
 update();
-
 }
 
 function update(){
 
 const slider=document.getElementById("slider");
-
 const w=slider.children[0].getBoundingClientRect().width;
 
 slider.style.transform=`translateX(-${index*w}px)`;
 
-document.getElementById("indicator").textContent=`${index+1} / ${total}`;
-
+document.getElementById("indicator").textContent=
+`${index+1} / ${total}`;
 }
 
 document.addEventListener("touchstart",e=>{
@@ -439,12 +479,7 @@ if(diff>50 && index<total-1) index++;
 if(diff<-50 && index>0) index--;
 
 update();
-
 });
-
-function closeCatalog(){
-document.getElementById("sliderContainer").style.display="none";
-}
 
 </script>
 
