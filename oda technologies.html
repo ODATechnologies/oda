@@ -3,13 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ODA Technologies</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:Arial, sans-serif;
+padding:0;
+box-sizing:border-box;
+font-family:'Pretendard',sans-serif;
+}
+
+body{
 background:#fff;
 color:#111;
 overflow-x:hidden;
@@ -20,24 +31,27 @@ overflow-x:hidden;
 #intro{
 position:fixed;
 inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
 background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
 z-index:9999;
-transition:opacity 1s ease;
+transition:all 0.8s ease;
 }
 
-#introLogo{
-width:200px;
-animation:introAnim 2.2s cubic-bezier(.77,0,.18,1) forwards;
+#intro img{
+width:180px;
+opacity:0;
+animation:fadeIn 1s forwards;
 }
 
-@keyframes introAnim{
-0%{transform:scale(0.8);opacity:0;}
-40%{transform:scale(1.05);opacity:1;}
-70%{transform:scale(1);}
-100%{transform:translateY(-42vh) scale(0.4);}
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+#intro.hide{
+opacity:0;
+pointer-events:none;
 }
 
 /* ================= HEADER ================= */
@@ -45,233 +59,219 @@ animation:introAnim 2.2s cubic-bezier(.77,0,.18,1) forwards;
 header{
 position:fixed;
 top:0;
-width:100%;
-height:56px;
+left:0;
+right:0;
+height:52px;
+background:#fff;
 display:flex;
-justify-content:center;
 align-items:center;
-background:rgba(255,255,255,0.85);
-backdrop-filter:blur(12px);
+justify-content:center;
+border-bottom:1px solid #eee;
 z-index:1000;
 }
 
 header img{
-height:26px;
+height:20px;
 }
 
-/* premium icon */
-
-.home-btn{
+.header-right{
 position:absolute;
 right:16px;
-width:22px;
-height:22px;
+top:50%;
+transform:translateY(-50%);
 }
 
-.home-btn svg{
-width:100%;
-height:100%;
-fill:#111;
-opacity:0.85;
+.header-right a{
+color:#111;
+display:flex;
+align-items:center;
 }
 
-/* ================= MAIN ================= */
-
-.container{
-padding-top:70px;
-padding-bottom:120px;
-}
+/* ================= HERO ================= */
 
 .hero{
+padding-top:90px;
 text-align:center;
-padding:30px 20px 10px;
+padding-bottom:30px;
 }
 
 .hero h1{
-font-size:20px;
+font-size:18px;
 font-weight:800;
-letter-spacing:1px;
+white-space:nowrap;
+overflow:hidden;
+
+background:linear-gradient(90deg,#111,#eb4c00,#111);
+background-size:200% auto;
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+0%{background-position:0% center;}
+100%{background-position:200% center;}
 }
 
 /* ================= VIDEO ================= */
 
-.video-section{
-padding:10px 20px;
-text-align:center;
+.video{
+padding:0 20px;
+margin-top:20px;
 }
 
-video{
+.video video{
 width:100%;
 border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
-.lang-btns button{
-padding:8px 16px;
-margin:5px;
+.video-toggle{
+display:flex;
+gap:10px;
+justify-content:center;
+margin-top:12px;
+}
+
+.video-toggle button{
 border:none;
+padding:8px 14px;
 border-radius:20px;
-background:#111;
-color:white;
+background:#eee;
+font-size:13px;
 }
 
-/* ================= BX BANNER ================= */
+.video-toggle button.active{
+background:#111;
+color:#fff;
+}
 
-.bx-wrap{
+/* ================= BX SLIDE ================= */
+
+.bx{
+margin:30px 0;
 display:flex;
 justify-content:center;
-padding:30px 20px;
 }
 
-.bx-wrap img{
-width:100%;
-max-width:520px;
+.bx img{
+width:90%;
 border-radius:18px;
-box-shadow:0 15px 40px rgba(0,0,0,0.25);
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-.coming{
-position:absolute;
-color:#fff;
-font-weight:600;
-font-size:18px;
-text-align:center;
-background:rgba(0,0,0,0.45);
-padding:12px 18px;
-border-radius:12px;
-backdrop-filter:blur(6px);
-}
-
-/* ================= CATALOG BUTTON ================= */
+/* ================= CATALOG BUTTONS ================= */
 
 .catalog{
-padding:30px 20px;
+padding:40px 20px;
 display:flex;
 flex-direction:column;
 gap:18px;
+background:#030405;
 }
-
-/* base */
 
 .catalog button{
 border:none;
-padding:26px 20px;
-border-radius:18px;
+padding:20px 18px;
+border-radius:16px;
 font-weight:600;
 text-align:center;
-font-size:18px;
-line-height:1.6;
+font-size:16px;
+line-height:1.5;
 color:#fff;
-position:relative;
-overflow:hidden;
+background:linear-gradient(135deg,#0c0f11,#030405);
+box-shadow:
+0 4px 12px rgba(0,0,0,0.4),
+inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
-/* korean */
-
-.catalog .kor{
-background:linear-gradient(135deg,#030405,#0d1b2a);
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-/* english */
-
-.catalog .eng{
-background:linear-gradient(135deg,#030405,#2a0d05);
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-.catalog small{
+.catalog button span{
 display:block;
-font-size:13px;
+font-size:12px;
 opacity:0.7;
+margin-top:4px;
 }
 
-/* hover feel */
+/* ================= CATALOG SLIDER ================= */
 
-.catalog button:active{
-transform:scale(0.97);
-}
-
-/* ================= FOOTER CTA ================= */
-
-footer{
-position:fixed;
-bottom:10px;
-left:10px;
-right:10px;
-z-index:1000;
-}
-
-footer a{
-display:block;
-text-align:center;
-padding:16px;
-border-radius:40px;
-background:#eb4c00;
-color:#fff;
-text-decoration:none;
-font-weight:bold;
-animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.05)}
-100%{transform:scale(1)}
-}
-
-/* ================= LIGHTBOX ================= */
-
-#lightbox{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.9);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-#lightbox img{
-max-width:95%;
-max-height:95%;
-}
-
-/* ================= CATALOG VIEW ================= */
-
-#catalogView{
+#sliderContainer{
 position:fixed;
 inset:0;
 background:#000;
+z-index:9999;
 display:none;
 flex-direction:column;
-z-index:9999;
 }
 
 .catalog-header{
 padding:14px;
-border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 .catalog-header button{
+background:none;
 border:none;
-background:#eb4c00;
 color:#fff;
-padding:10px 14px;
-border-radius:8px;
+font-size:16px;
 }
 
-.catalog-slider{
+.slider-wrap{
 flex:1;
-overflow-x:auto;
 display:flex;
-scroll-snap-type:x mandatory;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+position:relative;
 }
 
-.catalog-slider img{
-flex:0 0 100%;
-width:100%;
-scroll-snap-align:center;
+#slider{
+display:flex;
+height:100%;
+transition:transform 0.35s ease;
+}
+
+#slider img{
+width:100vw;
+object-fit:contain;
+}
+
+#indicator{
+position:absolute;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+color:#fff;
+background:rgba(0,0,0,0.5);
+padding:6px 14px;
+border-radius:20px;
+font-size:14px;
+}
+
+/* ================= FLOAT BUTTON ================= */
+
+.float-btn{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:linear-gradient(135deg,#ff8a00,#ff6a00);
+color:#fff;
+padding:16px 28px;
+border-radius:30px;
+font-weight:600;
+text-align:center;
+box-shadow:0 8px 25px rgba(255,106,0,0.4);
+z-index:1000;
+text-decoration:none;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+padding:40px 20px 100px;
+text-align:center;
+font-size:12px;
+color:#888;
 }
 
 </style>
@@ -280,160 +280,170 @@ scroll-snap-align:center;
 <body>
 
 <!-- INTRO -->
-
 <div id="intro">
-<img src="odalogo_new20220221(가로).png" id="introLogo">
+<img src="oda/odalogo_new20220221(가로).png">
 </div>
 
+<!-- HEADER -->
 <header>
+<img src="oda/odalogo_new20220221(가로).png">
 
-<img src="odalogo_new20220221(가로).png">
-
-<a href="https://www.odacore.com/main" class="home-btn">
-
-<!-- premium globe icon -->
-<svg viewBox="0 0 24 24">
-<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.9 9h-3.2a15.7 15.7 0 00-1.1-5 8.03 8.03 0 014.3 5zM12 4c1 1.5 1.8 3.6 2 7H10c.2-3.4 1-5.5 2-7zM4.8 14a8 8 0 010-4h3.4a17 17 0 000 4H4.8zm.3 2h3.2a15.7 15.7 0 001.1 5 8.03 8.03 0 01-4.3-5zM12 20c-1-1.5-1.8-3.6-2-7h4c-.2 3.4-1 5.5-2 7zm2.6 1a15.7 15.7 0 001.1-5h3.2a8.03 8.03 0 01-4.3 5z"/>
-</svg>
-
+<div class="header-right">
+<a href="https://www.odacore.com/main" target="_blank">
+<i data-lucide="globe"></i>
 </a>
+</div>
 
 </header>
 
-<div class="container">
-
+<!-- HERO -->
 <section class="hero">
 <h1>WE'RE CONNECTED TO YOUR LIFE</h1>
 </section>
 
-<section class="video-section">
+<!-- VIDEO -->
+<section class="video">
 
-<video id="videoPlayer" controls autoplay muted playsinline>
-<source src="https://odatechnologies.github.io/oda/int/kor.mp4">
-</video>
+<video id="mainVideo" src="https://odatechnologies.github.io/oda/int/kor.mp4" autoplay muted loop playsinline></video>
 
-<div class="lang-btns">
-<button onclick="changeVideo('kor')">KOR</button>
-<button onclick="changeVideo('eng')">ENG</button>
+<div class="video-toggle">
+<button class="active" onclick="changeVideo('kor',this)">KOR</button>
+<button onclick="changeVideo('eng',this)">ENG</button>
 </div>
 
 </section>
 
-<!-- BX Banner -->
+<!-- BX IMAGE -->
+<section class="bx">
+<img src="oda/bx.jpg">
+</section>
 
-<div class="bx-wrap">
-<img src="BX시리즈-QR코드-배너.png" onclick="openLightbox(this.src)">
-</div>
-
-<!-- Catalog Buttons -->
-
+<!-- CATALOG -->
 <section class="catalog">
 
-<button class="kor" onclick="openCatalog('kor')">
-국문 카탈로그
-<small>(KOREAN KATALOG)</small>
+<button onclick="openCatalog('kor')">
+국문 카탈로그(KOREAN CATALOG)
+<span>보기</span>
 </button>
 
-<button class="eng" onclick="openCatalog('eng')">
+<button onclick="openCatalog('eng')">
 ENGLISH CATALOG
-<small>(영문 카탈로그)</small>
+<span>VIEW</span>
 </button>
 
 </section>
 
-</div>
-
-<footer>
-<a href="https://forms.gle/JdcosiosWY13QEAN6">
-제품 상담 · 견적 문의 (Quote Request)
-</a>
-</footer>
-
-<!-- Catalog Viewer -->
-
-<div id="catalogView">
+<!-- CATALOG VIEWER -->
+<div id="sliderContainer">
 
 <div class="catalog-header">
 <button onclick="closeCatalog()">← 뒤로가기</button>
 </div>
 
-<div class="catalog-slider" id="catalogSlider"></div>
+<div class="slider-wrap">
+
+<div id="slider"></div>
+<div id="indicator">1 / 44</div>
 
 </div>
 
-<!-- Lightbox -->
-
-<div id="lightbox" onclick="closeLightbox()">
-<img id="lightboxImg">
 </div>
+
+<!-- FLOAT BUTTON -->
+<a class="float-btn" href="https://forms.gle/JdcosiosWY13QEAN6" target="_blank">
+제품 상담 · 견적 문의<br>
+<span style="font-size:12px;opacity:0.8">Quote Request</span>
+</a>
+
+<footer>
+© ODA Technologies
+</footer>
 
 <script>
 
-/* INTRO */
+/* lucide icons */
+lucide.createIcons();
 
-window.onload=()=>{
+/* intro animation */
+
+window.addEventListener("load",()=>{
 setTimeout(()=>{
-document.getElementById("intro").style.opacity=0;
-setTimeout(()=>{
-document.getElementById("intro").style.display="none";
-},1000);
-},2200);
-}
+document.getElementById("intro").classList.add("hide");
+},1500);
+});
 
-/* VIDEO */
+/* video */
 
-function changeVideo(lang){
+function changeVideo(lang,btn){
 
-let player=document.getElementById("videoPlayer");
+const video=document.getElementById("mainVideo");
 
-if(lang==="eng"){
-player.src="https://odatechnologies.github.io/oda/int/eng.mp4";
-}else{
-player.src="https://odatechnologies.github.io/oda/int/kor.mp4";
-}
+video.src = lang==="kor"
+? "https://odatechnologies.github.io/oda/int/kor.mp4"
+: "https://odatechnologies.github.io/oda/int/eng.mp4";
 
-player.play();
+document.querySelectorAll(".video-toggle button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
 
 }
 
-/* LIGHTBOX */
+/* Catalog */
 
-function openLightbox(src){
-document.getElementById("lightbox").style.display="flex";
-document.getElementById("lightboxImg").src=src;
-}
-
-function closeLightbox(){
-document.getElementById("lightbox").style.display="none";
-}
-
-/* CATALOG */
+const total = 44;
+let index = 0;
+let startX = 0;
 
 function openCatalog(lang){
 
-let slider=document.getElementById("catalogSlider");
+document.getElementById("sliderContainer").style.display="flex";
+
+const slider=document.getElementById("slider");
 slider.innerHTML="";
+index=0;
 
-for(let i=0;i<44;i++){
+for(let i=0;i<total;i++){
 
-let img=document.createElement("img");
+const img=document.createElement("img");
 
-img.src = `oda/catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
-
-img.loading="lazy";
-
-img.onclick=()=>openLightbox(img.src);
+img.src=`oda/catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
 
 slider.appendChild(img);
 
 }
 
-document.getElementById("catalogView").style.display="flex";
+update();
 
 }
 
+function update(){
+
+const slider=document.getElementById("slider");
+
+const w=slider.children[0].getBoundingClientRect().width;
+
+slider.style.transform=`translateX(-${index*w}px)`;
+
+document.getElementById("indicator").textContent=`${index+1} / ${total}`;
+
+}
+
+document.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+document.addEventListener("touchend",e=>{
+
+const diff=startX-e.changedTouches[0].clientX;
+
+if(diff>50 && index<total-1) index++;
+if(diff<-50 && index>0) index--;
+
+update();
+
+});
+
 function closeCatalog(){
-document.getElementById("catalogView").style.display="none";
+document.getElementById("sliderContainer").style.display="none";
 }
 
 </script>
