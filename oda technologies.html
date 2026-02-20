@@ -12,28 +12,34 @@
 <style>
 :root{ --header-h:52px; }
 *{ margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',sans-serif; }
+body{ background:#fff; color:#111; overflow-x:hidden; }
 
-/* 🔥 처음 화면 어둡게 */
-body{
+/* =========================
+   INTRO
+========================= */
+
+#introOverlay{
+ position:fixed;
+ inset:0;
  background:#fff;
- color:#111;
- overflow-x:hidden;
- opacity:0;
+ z-index:5000;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  transition:opacity 1.2s ease;
 }
 
-body.loaded{
- opacity:1;
+#introOverlay.fade{
+ opacity:0;
+ pointer-events:none;
 }
 
-/* INTRO LOGO */
 #introLogo{
- position:fixed;
+ position:absolute;
  top:50%;
  left:50%;
  transform:translate(-50%,-50%);
- z-index:5000;
- transition:all 1s cubic-bezier(.7,0,.2,1);
+ transition:all 1.2s cubic-bezier(.7,0,.2,1);
 }
 
 #introLogo img{
@@ -44,11 +50,12 @@ body.loaded{
  top:calc(var(--header-h) / 2);
  left:50%;
  transform:translate(-50%,-50%) scale(0.6);
- opacity:0;
- pointer-events:none;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
+
 header{
  position:fixed; top:0; left:0; right:0;
  height:var(--header-h);
@@ -56,7 +63,14 @@ header{
  display:flex; align-items:center; justify-content:center;
  border-bottom:1px solid #eee;
  z-index:1000;
+ opacity:0;
+ transition:opacity 1s ease;
 }
+
+header.show{
+ opacity:1;
+}
+
 header img{ height:20px; }
 
 .header-right{
@@ -246,98 +260,6 @@ header img{ height:20px; }
  50%{opacity:0.3;}
 }
 
-/* SLIDER */
-#sliderContainer{
- display:none;
- position:fixed;
- inset:0;
- background:#000;
- z-index:3000;
- overflow:hidden;
- padding-bottom:env(safe-area-inset-bottom);
-}
-#slider{
- display:flex;
- height:100%;
- transition:transform 0.35s ease;
-}
-#slider img{
- width:100vw;
- height:calc(100vh - 60px);
- object-fit:contain;
- flex-shrink:0;
- padding-bottom:env(safe-area-inset-bottom);
-}
-
-.swipe-guide{
- position:fixed;
- bottom:60px;
- left:50%;
- transform:translateX(-50%);
- background:rgba(0,0,0,0.6);
- color:#fff;
- padding:8px 16px;
- border-radius:20px;
- font-size:13px;
- z-index:4000;
- animation:blink 1s infinite;
- display:none;
-}
-
-.close-btn{
- position:fixed;
- top:calc(12px + env(safe-area-inset-top));
- right:12px;
- background:rgba(0,0,0,0.6);
- color:#fff;
- border:none;
- padding:8px 12px;
- border-radius:8px;
- font-size:13px;
- z-index:4000;
-}
-
-#indicator{
- position:fixed;
- bottom:20px;
- right:16px;
- background:rgba(0,0,0,0.6);
- color:#fff;
- padding:6px 12px;
- border-radius:20px;
- font-size:13px;
- display:none;
- z-index:4000;
-}
-
-/* FLOAT BUTTON */
-.float-btn{
- position:fixed;
- bottom:20px;
- left:50%;
- transform:translateX(-50%);
- width:80%;
- max-width:420px;
- height:56px;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- text-align:center;
- background:linear-gradient(135deg,#ff8a00,#ff6a00);
- color:#fff;
- border-radius:18px;
- font-weight:700;
- box-shadow:0 8px 25px rgba(255,106,0,0.4);
- z-index:1500;
- text-decoration:none;
-}
-.float-btn span{
- font-size:13px;
- opacity:0.9;
- margin-top:2px;
-}
-
 /* FOOTER */
 footer{
  padding:40px 20px 100px;
@@ -350,12 +272,14 @@ footer{
 
 <body>
 
-<!-- INTRO LOGO -->
-<div id="introLogo">
-  <img src="odalogo_new20220221(가로).png">
+<!-- INTRO -->
+<div id="introOverlay">
+  <div id="introLogo">
+    <img src="odalogo_new20220221(가로).png">
+  </div>
 </div>
 
-<header>
+<header id="mainHeader">
 <img src="odalogo_new20220221(가로).png">
 <div class="header-right">
 <a href="https://www.odacore.com/main" target="_blank" class="header-icon">
@@ -368,179 +292,40 @@ footer{
 <h1>WE'RE CONNECTED TO YOUR LIFE</h1>
 </section>
 
-<section class="video">
-<div class="video-wrap">
-<video id="mainVideo"
-src="https://odatechnologies.github.io/oda/int/kor.mp4"
-autoplay muted loop playsinline></video>
-<div id="soundIndicator" class="sound-indicator">🔇</div>
-</div>
-
-<div class="video-toggle">
-<button class="active" onclick="changeVideo('kor',this)">KOR</button>
-<button onclick="changeVideo('eng',this)">ENG</button>
-</div>
-</section>
-
-<div class="upcoming">
-<div class="upcoming-title">Next Generation Line-up</div>
-<div class="upcoming-desc">
-자료 및 출시 일정 관련하여<br>
-아래 문의 남겨주시면 회신드리겠습니다.
-</div>
-</div>
-
-<section class="bx">
-<img src="BX시리즈-QR코드-배너.png">
-</section>
-
-<section class="catalog">
-<div class="catalog-title">PRODUCT CATALOG</div>
-
-<div class="lang-select">
-<div class="lang kor" onclick="openCatalog('kor')">
-<div class="title">국문 카탈로그</div>
-<div class="sub">KOREAN CATALOG</div>
-</div>
-
-<div class="lang eng" onclick="openCatalog('eng')">
-<div class="title">ENGLISH CATALOG</div>
-<div class="sub">영문 카탈로그</div>
-</div>
-
-<div class="center-guide">
-<span>선택해주세요<br>Please select</span>
-</div>
-</div>
-</section>
-
-<div id="sliderContainer">
-<button class="close-btn" onclick="closeCatalog()">닫기 ✕</button>
-<div id="slider"></div>
-<div id="indicator">1 / 44</div>
-<div id="swipeGuide" class="swipe-guide">&lt;- SWIPE -&gt;</div>
-</div>
-
-<a class="float-btn"
-href="https://forms.gle/JdcosiosWY13QEAN6"
-target="_blank">
-제품 상담 · 견적 문의
-<span>Quote Request</span>
-</a>
-
 <footer>
-© ODA Technologies<br>
-인천광역시 부평구 부평대로329번길 62<br>
-TEL : 1800-8644 / CS TEAM : 070-5032-2921~2
+© ODA Technologies
 </footer>
 
 <script>
 lucide.createIcons();
 
-/* 🔥 intro animation */
+/* ======================
+   INTRO ANIMATION
+====================== */
+
 window.addEventListener("load",()=>{
 
- const intro = document.getElementById("introLogo");
+ const logo = document.getElementById("introLogo");
+ const overlay = document.getElementById("introOverlay");
+ const header = document.getElementById("mainHeader");
 
  setTimeout(()=>{
-  intro.classList.add("move");
-  document.body.classList.add("loaded");
- },800);
+
+  logo.classList.add("move");
+  header.classList.add("show");
+
+ },500);
 
  setTimeout(()=>{
-  intro.remove();
- },2000);
 
-});
+  overlay.classList.add("fade");
 
-/* video language change */
-function changeVideo(lang,btn){
- const video=document.getElementById("mainVideo");
-
- video.src = lang==="kor"
- ? "https://odatechnologies.github.io/oda/int/kor.mp4"
- : "https://odatechnologies.github.io/oda/int/eng.mp4";
-
- document.querySelectorAll(".video-toggle button")
- .forEach(b=>b.classList.remove("active"));
-
- btn.classList.add("active");
-
- video.muted=true;
- document.getElementById("soundIndicator").textContent="🔇";
-}
-
-/* video sound toggle */
-const videoEl = document.getElementById("mainVideo");
-const soundIndicator = document.getElementById("soundIndicator");
-
-videoEl.addEventListener("click",()=>{
- videoEl.muted = !videoEl.muted;
- soundIndicator.textContent = videoEl.muted ? "🔇" : "🔊";
-});
-
-/* catalog */
-const total = 44;
-let index = 0;
-let startX = 0;
-
-function openCatalog(lang){
-
- document.body.style.overflow="hidden";
- document.querySelector(".float-btn").style.display="none";
-
- document.getElementById("sliderContainer").style.display="block";
- document.getElementById("indicator").style.display="block";
-
- const slider=document.getElementById("slider");
- slider.innerHTML="";
- index=0;
-
- for(let i=0;i<total;i++){
-  const img=document.createElement("img");
-  img.src=`catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
-  slider.appendChild(img);
- }
-
- update();
-
- const guide=document.getElementById("swipeGuide");
- guide.style.display="block";
+ },1200);
 
  setTimeout(()=>{
-  guide.style.display="none";
- },5000);
-}
+  overlay.remove();
+ },2400);
 
-function closeCatalog(){
- document.body.style.overflow="auto";
- document.querySelector(".float-btn").style.display="flex";
- document.getElementById("sliderContainer").style.display="none";
- document.getElementById("indicator").style.display="none";
-}
-
-function update(){
-
- const slider=document.getElementById("slider");
-
- const w=slider.children[0].getBoundingClientRect().width;
-
- slider.style.transform=`translateX(-${index*w}px)`;
-
- document.getElementById("indicator").textContent=`${index+1} / ${total}`;
-}
-
-document.addEventListener("touchstart",e=>{
- startX=e.touches[0].clientX;
-});
-
-document.addEventListener("touchend",e=>{
- const diff=startX-e.changedTouches[0].clientX;
-
- if(diff>50 && index<total-1) index++;
- if(diff<-50 && index>0) index--;
-
- update();
 });
 </script>
 
