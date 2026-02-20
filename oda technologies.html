@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,7 +12,41 @@
 <style>
 :root{ --header-h:52px; }
 *{ margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',sans-serif; }
-body{ background:#fff; color:#111; overflow-x:hidden; }
+
+/* 🔥 처음 화면 어둡게 */
+body{
+ background:#fff;
+ color:#111;
+ overflow-x:hidden;
+ opacity:0;
+ transition:opacity 1.2s ease;
+}
+
+body.loaded{
+ opacity:1;
+}
+
+/* INTRO LOGO */
+#introLogo{
+ position:fixed;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ z-index:5000;
+ transition:all 1s cubic-bezier(.7,0,.2,1);
+}
+
+#introLogo img{
+ height:60px;
+}
+
+#introLogo.move{
+ top:calc(var(--header-h) / 2);
+ left:50%;
+ transform:translate(-50%,-50%) scale(0.6);
+ opacity:0;
+ pointer-events:none;
+}
 
 /* HEADER */
 header{
@@ -315,6 +350,11 @@ footer{
 
 <body>
 
+<!-- INTRO LOGO -->
+<div id="introLogo">
+  <img src="odalogo_new20220221(가로).png">
+</div>
+
 <header>
 <img src="odalogo_new20220221(가로).png">
 <div class="header-right">
@@ -374,7 +414,6 @@ autoplay muted loop playsinline></video>
 </div>
 </section>
 
-<!-- SLIDER -->
 <div id="sliderContainer">
 <button class="close-btn" onclick="closeCatalog()">닫기 ✕</button>
 <div id="slider"></div>
@@ -397,6 +436,22 @@ TEL : 1800-8644 / CS TEAM : 070-5032-2921~2
 
 <script>
 lucide.createIcons();
+
+/* 🔥 intro animation */
+window.addEventListener("load",()=>{
+
+ const intro = document.getElementById("introLogo");
+
+ setTimeout(()=>{
+  intro.classList.add("move");
+  document.body.classList.add("loaded");
+ },800);
+
+ setTimeout(()=>{
+  intro.remove();
+ },2000);
+
+});
 
 /* video language change */
 function changeVideo(lang,btn){
@@ -491,3 +546,4 @@ document.addEventListener("touchend",e=>{
 
 </body>
 </html>
+```
