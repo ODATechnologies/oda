@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,9 +11,31 @@
 <style>
 :root{ --header-h:52px; }
 *{ margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',sans-serif; }
-body{ background:#fff; color:#111; overflow-x:hidden; }
 
-/* ===== INTRO LOGO ===== */
+body{
+ background:#fff;
+ color:#111;
+ overflow-x:hidden;
+}
+
+/* ===== INTRO ===== */
+
+#app{
+ opacity:0;
+ transition:opacity 1s ease;
+}
+
+body.loaded #app{
+ opacity:1;
+}
+
+#introOverlay{
+ position:fixed;
+ inset:0;
+ background:#fff;
+ z-index:4000;
+}
+
 #introLogo{
  position:fixed;
  top:50%;
@@ -24,14 +45,9 @@ body{ background:#fff; color:#111; overflow-x:hidden; }
  pointer-events:none;
  transition:all 1.2s cubic-bezier(.7,0,.2,1);
 }
+
 #introLogo img{
- height:70px;
-}
-#introLogo.move{
- top:calc(var(--header-h) / 2);
- left:50%;
- transform:translate(-50%,-50%) scale(0.3);
- opacity:0;
+ height:60px;
 }
 
 /* HEADER */
@@ -336,13 +352,16 @@ footer{
 
 <body>
 
-<!-- INTRO LOGO -->
+<!-- INTRO -->
+<div id="introOverlay"></div>
 <div id="introLogo">
   <img src="odalogo_new20220221(가로).png">
 </div>
 
+<div id="app">
+
 <header>
-<img src="odalogo_new20220221(가로).png">
+<img id="headerLogo" src="odalogo_new20220221(가로).png">
 <div class="header-right">
 <a href="https://www.odacore.com/main" target="_blank" class="header-icon">
 <i data-lucide="globe"></i>
@@ -400,7 +419,6 @@ autoplay muted loop playsinline></video>
 </div>
 </section>
 
-<!-- SLIDER -->
 <div id="sliderContainer">
 <button class="close-btn" onclick="closeCatalog()">닫기 ✕</button>
 <div id="slider"></div>
@@ -421,20 +439,38 @@ target="_blank">
 TEL : 1800-8644 / CS TEAM : 070-5032-2921~2
 </footer>
 
+</div> <!-- app end -->
+
 <script>
 lucide.createIcons();
 
 /* ===== INTRO ANIMATION ===== */
+
 window.addEventListener("load",()=>{
 
  const intro = document.getElementById("introLogo");
+ const headerLogo = document.getElementById("headerLogo");
+ const overlay = document.getElementById("introOverlay");
+
+ const rect = headerLogo.getBoundingClientRect();
+
+ const targetX = rect.left + rect.width/2;
+ const targetY = rect.top + rect.height/2;
 
  setTimeout(()=>{
-   intro.classList.add("move");
- },400);
+
+   intro.style.top = targetY + "px";
+   intro.style.left = targetX + "px";
+   intro.style.transform = "translate(-50%,-50%) scale(0.5)";
+   intro.style.opacity = "0";
+
+   document.body.classList.add("loaded");
+
+ },500);
 
  setTimeout(()=>{
    intro.remove();
+   overlay.remove();
  },1800);
 
 });
@@ -532,4 +568,3 @@ document.addEventListener("touchend",e=>{
 
 </body>
 </html>
-```
