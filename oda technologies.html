@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,6 +13,26 @@
 :root{ --header-h:52px; }
 *{ margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',sans-serif; }
 body{ background:#fff; color:#111; overflow-x:hidden; }
+
+/* ===== INTRO LOGO ===== */
+#introLogo{
+ position:fixed;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ z-index:5000;
+ pointer-events:none;
+ transition:all 1.2s cubic-bezier(.7,0,.2,1);
+}
+#introLogo img{
+ height:70px;
+}
+#introLogo.move{
+ top:calc(var(--header-h) / 2);
+ left:50%;
+ transform:translate(-50%,-50%) scale(0.3);
+ opacity:0;
+}
 
 /* HEADER */
 header{
@@ -315,6 +336,11 @@ footer{
 
 <body>
 
+<!-- INTRO LOGO -->
+<div id="introLogo">
+  <img src="odalogo_new20220221(가로).png">
+</div>
+
 <header>
 <img src="odalogo_new20220221(가로).png">
 <div class="header-right">
@@ -397,6 +423,21 @@ TEL : 1800-8644 / CS TEAM : 070-5032-2921~2
 
 <script>
 lucide.createIcons();
+
+/* ===== INTRO ANIMATION ===== */
+window.addEventListener("load",()=>{
+
+ const intro = document.getElementById("introLogo");
+
+ setTimeout(()=>{
+   intro.classList.add("move");
+ },400);
+
+ setTimeout(()=>{
+   intro.remove();
+ },1800);
+
+});
 
 /* video language change */
 function changeVideo(lang,btn){
@@ -491,3 +532,4 @@ document.addEventListener("touchend",e=>{
 
 </body>
 </html>
+```
