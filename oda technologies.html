@@ -3,482 +3,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ODA Technologies</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
+:root{ --header-h:52px; }
+*{ margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',sans-serif; }
+body{ background:#fff; color:#111; overflow-x:hidden; }
 
-:root{
---header-h:52px;
---ease:cubic-bezier(0.22,1,0.36,1);
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Pretendard',sans-serif;
-}
-
-body{
-background:#fff;
-color:#111;
-overflow-x:hidden;
-}
-
-/* ================= INTRO ================= */
-
-#intro{
-position:fixed;
-inset:0;
-background:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
-
-#introLogo{
-width:200px;
-opacity:0;
-filter:blur(12px);
-transform:scale(1.2);
-transition:
-all 1.4s var(--ease),
-filter 1s ease,
-opacity 1s ease;
-}
-
-#intro.show #introLogo{
-opacity:1;
-filter:blur(0);
-transform:scale(1);
-}
-
-#intro.fade{
-opacity:0;
-transition:opacity .7s ease;
-pointer-events:none;
-}
-
-/* 초기 페이지 숨김 */
-
-body.loading header,
-body.loading section,
-body.loading footer,
-body.loading .float-btn{
-opacity:0;
-transform:translateY(10px);
-}
-
-body.loaded header,
-body.loaded section,
-body.loaded footer,
-body.loaded .float-btn{
-opacity:1;
-transform:none;
-transition:0.8s var(--ease);
-}
-
-/* ================= HEADER ================= */
-
+/* HEADER */
 header{
-position:fixed;
-top:0;
-left:0;
-right:0;
-height:var(--header-h);
-background:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-border-bottom:1px solid #eee;
-z-index:1000;
+ position:fixed; top:0; left:0; right:0;
+ height:var(--header-h);
+ background:#fff;
+ display:flex; align-items:center; justify-content:center;
+ border-bottom:1px solid #eee;
+ z-index:1000;
 }
-
-header img{
-height:20px;
-}
+header img{ height:20px; }
 
 .header-right{
-position:absolute;
-right:16px;
-top:50%;
-transform:translateY(-50%);
-display:flex;
-gap:10px;
-align-items:center;
+ position:absolute; right:16px; top:50%;
+ transform:translateY(-50%);
+ display:flex; gap:10px; align-items:center;
 }
 
 .header-icon{
-width:34px;
-height:34px;
-border-radius:10px;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:0.2s;
+ width:34px; height:34px;
+ border-radius:10px;
+ display:flex; align-items:center; justify-content:center;
+ cursor:pointer; transition:0.2s;
 }
+.header-icon:hover{ background:#f2f2f2; }
+.header-icon i{ width:18px; height:18px; }
 
-.header-icon:hover{
-background:#f2f2f2;
-}
-
-.header-icon i{
-width:18px;
-height:18px;
-}
-
-/* ================= HERO ================= */
-
+/* HERO */
 .hero{
-padding-top:90px;
-text-align:center;
-padding-bottom:30px;
+ padding-top:90px;
+ text-align:center;
+ padding-bottom:30px;
 }
-
 .hero h1{
-font-size:20px;
-font-weight:800;
-white-space:nowrap;
-overflow:hidden;
-background:linear-gradient(90deg,#111,#eb4c00,#111);
-background-size:200% auto;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shine 4s linear infinite;
+ font-size:20px;
+ font-weight:800;
+ white-space:nowrap;
+ overflow:hidden;
+ background:linear-gradient(90deg,#111,#eb4c00,#111);
+ background-size:200% auto;
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+ animation:shine 4s linear infinite;
 }
-
 @keyframes shine{
-0%{background-position:0% center;}
-100%{background-position:200% center;}
+ 0%{background-position:0% center;}
+ 100%{background-position:200% center;}
 }
 
-/* ================= VIDEO ================= */
-
-.video{
-padding:0 20px;
-margin-top:20px;
-}
-
-.video-wrap{
-position:relative;
-}
-
-.video video{
-width:100%;
-border-radius:14px;
-}
+/* VIDEO */
+.video{ padding:0 20px; margin-top:20px; }
+.video-wrap{ position:relative; }
+.video video{ width:100%; border-radius:14px; }
 
 .sound-indicator{
-position:absolute;
-bottom:10px;
-right:10px;
-background:rgba(0,0,0,0.6);
-color:#fff;
-padding:6px 10px;
-border-radius:12px;
-font-size:13px;
-pointer-events:none;
+ position:absolute;
+ bottom:10px;
+ right:10px;
+ background:rgba(0,0,0,0.6);
+ color:#fff;
+ padding:6px 10px;
+ border-radius:12px;
+ font-size:13px;
+ pointer-events:none;
 }
 
 .video-toggle{
-display:flex;
-gap:10px;
-justify-content:center;
-margin-top:12px;
+ display:flex;
+ gap:10px;
+ justify-content:center;
+ margin-top:12px;
 }
-
 .video-toggle button{
-border:none;
-padding:8px 14px;
-border-radius:20px;
-background:#eee;
-font-size:13px;
-cursor:pointer;
+ border:none;
+ padding:8px 14px;
+ border-radius:20px;
+ background:#eee;
+ font-size:13px;
+ cursor:pointer;
 }
-
 .video-toggle button.active{
-background:#111;
-color:#fff;
+ background:#111;
+ color:#fff;
 }
 
-/* ================= UPCOMING PRODUCT ================= */
-
+/* UPCOMING */
 .upcoming{
-margin:20px 20px;
-padding:18px;
-border-radius:16px;
-border:1px solid #eee;
-background:#fafafa;
-text-align:center;
+ margin:20px 20px;
+ padding:18px;
+ border-radius:16px;
+ border:1px solid #eee;
+ background:#fafafa;
+ text-align:center;
 }
-
 .upcoming-title{
-font-weight:700;
-font-size:15px;
-margin-bottom:6px;
+ font-weight:700;
+ font-size:15px;
+ margin-bottom:6px;
 }
-
 .upcoming-desc{
-font-size:13px;
-color:#666;
-line-height:1.5;
+ font-size:13px;
+ color:#666;
+ line-height:1.5;
 }
 
-/* ================= BX ================= */
-
+/* BX */
 .bx{
-margin:10px 0 30px;
-display:flex;
-justify-content:center;
+ margin:10px 0 30px;
+ display:flex;
+ justify-content:center;
 }
-
 .bx img{
-width:90%;
-border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
+ width:90%;
+ border-radius:18px;
+ box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* ================= CATALOG ================= */
-
+/* CATALOG */
 .catalog{
-padding:50px 20px;
-background:#fff;
-border-top:1px solid #eee;
+ padding:50px 20px;
+ background:#fff;
+ border-top:1px solid #eee;
 }
-
 .catalog-title{
-text-align:center;
-font-weight:800;
-font-size:18px;
-margin-bottom:30px;
-letter-spacing:1px;
-width:100%;
+ text-align:center;
+ font-weight:800;
+ font-size:18px;
+ margin-bottom:30px;
+ letter-spacing:1px;
+ width:100%;
 }
 
 .lang-select{
-position:relative;
-border-radius:18px;
-overflow:hidden;
-border:1px solid #eee;
+ position:relative;
+ border-radius:18px;
+ overflow:hidden;
+ border:1px solid #eee;
 }
-
 .lang{
-height:120px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-background:#fafafa;
-transition:0.3s;
+ height:120px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ cursor:pointer;
+ background:#fafafa;
+ transition:0.3s;
 }
-
-.lang:hover{
-background:#f0f0f0;
-}
+.lang:hover{ background:#f0f0f0; }
 
 .lang.kor{background:#030405;}
-.lang.eng{
-background:#1a1c1e;
-border-top:1px solid #eee;
-}
+.lang.eng{ background:#1a1c1e; border-top:1px solid #eee; }
 
 .lang .title{
-font-size:20px;
-font-weight:800;
-color:#fff;
+ font-size:20px;
+ font-weight:800;
+ color:#fff;
 }
-
 .lang .sub{
-font-size:13px;
-margin-top:6px;
-color:#ccc;
+ font-size:13px;
+ margin-top:6px;
+ color:#ccc;
 }
 
-/* 가운데 가이드 */
-
+/* CENTER GUIDE */
 .center-guide{
-position:absolute;
-top:50%;
-left:0;
-width:100%;
-text-align:center;
-pointer-events:none;
-transform:translateY(-50%);
+ position:absolute;
+ top:50%;
+ left:0;
+ width:100%;
+ text-align:center;
+ pointer-events:none;
+ transform:translateY(-50%);
 }
-
 .center-guide::before{
-content:"";
-position:absolute;
-top:50%;
-left:10%;
-right:10%;
-height:1px;
-background:#ddd;
+ content:"";
+ position:absolute;
+ top:50%;
+ left:10%;
+ right:10%;
+ height:1px;
+ background:#ddd;
 }
-
 .center-guide span{
-position:relative;
-display:inline-block;
-background:#fff;
-padding:8px 18px;
-border-radius:20px;
-font-size:13px;
-line-height:1.4;
-color:#111;
-animation:blink 1.4s infinite;
+ position:relative;
+ display:inline-block;
+ background:#fff;
+ padding:8px 18px;
+ border-radius:20px;
+ font-size:13px;
+ line-height:1.4;
+ color:#111;
+ animation:blink 1.4s infinite;
 }
-
 @keyframes blink{
-0%,100%{opacity:1;}
-50%{opacity:0.3;}
+ 0%,100%{opacity:1;}
+ 50%{opacity:0.3;}
 }
 
-/* ================= SLIDER ================= */
-
+/* SLIDER */
 #sliderContainer{
-display:none;
-position:fixed;
-inset:0;
-background:#000;
-z-index:3000;
-overflow:hidden;
-padding-bottom:env(safe-area-inset-bottom);
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000;
+ z-index:3000;
+ overflow:hidden;
+ padding-bottom:env(safe-area-inset-bottom);
 }
-
 #slider{
-display:flex;
-height:100%;
-transition:transform 0.35s ease;
+ display:flex;
+ height:100%;
+ transition:transform 0.35s ease;
 }
-
 #slider img{
-width:100vw;
-height:calc(100vh - 60px);
-object-fit:contain;
-flex-shrink:0;
-padding-bottom:env(safe-area-inset-bottom);
+ width:100vw;
+ height:calc(100vh - 60px);
+ object-fit:contain;
+ flex-shrink:0;
+ padding-bottom:env(safe-area-inset-bottom);
 }
-
-/* SWIPE GUIDE */
 
 .swipe-guide{
-position:fixed;
-bottom:60px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(0,0,0,0.6);
-color:#fff;
-padding:8px 16px;
-border-radius:20px;
-font-size:13px;
-z-index:4000;
-animation:blink 1s infinite;
-display:none;
+ position:fixed;
+ bottom:60px;
+ left:50%;
+ transform:translateX(-50%);
+ background:rgba(0,0,0,0.6);
+ color:#fff;
+ padding:8px 16px;
+ border-radius:20px;
+ font-size:13px;
+ z-index:4000;
+ animation:blink 1s infinite;
+ display:none;
 }
-
-/* 닫기 버튼 */
 
 .close-btn{
-position:fixed;
-top:calc(12px + env(safe-area-inset-top));
-right:12px;
-background:rgba(0,0,0,0.6);
-color:#fff;
-border:none;
-padding:8px 12px;
-border-radius:8px;
-font-size:13px;
-z-index:4000;
+ position:fixed;
+ top:calc(12px + env(safe-area-inset-top));
+ right:12px;
+ background:rgba(0,0,0,0.6);
+ color:#fff;
+ border:none;
+ padding:8px 12px;
+ border-radius:8px;
+ font-size:13px;
+ z-index:4000;
 }
 
-/* 인디케이터 */
-
 #indicator{
-position:fixed;
-bottom:20px;
-right:16px;
-background:rgba(0,0,0,0.6);
-color:#fff;
-padding:6px 12px;
-border-radius:20px;
-font-size:13px;
-display:none;
-z-index:4000;
+ position:fixed;
+ bottom:20px;
+ right:16px;
+ background:rgba(0,0,0,0.6);
+ color:#fff;
+ padding:6px 12px;
+ border-radius:20px;
+ font-size:13px;
+ display:none;
+ z-index:4000;
 }
 
 /* FLOAT BUTTON */
-
 .float-btn{
-position:fixed;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-width:80%;
-max-width:420px;
-height:56px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(135deg,#ff8a00,#ff6a00);
-color:#fff;
-border-radius:18px;
-font-weight:700;
-box-shadow:0 8px 25px rgba(255,106,0,0.4);
-z-index:1500;
-text-decoration:none;
+ position:fixed;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ width:80%;
+ max-width:420px;
+ height:56px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ background:linear-gradient(135deg,#ff8a00,#ff6a00);
+ color:#fff;
+ border-radius:18px;
+ font-weight:700;
+ box-shadow:0 8px 25px rgba(255,106,0,0.4);
+ z-index:1500;
+ text-decoration:none;
 }
-
 .float-btn span{
-font-size:13px;
-opacity:0.9;
-margin-top:2px;
+ font-size:13px;
+ opacity:0.9;
+ margin-top:2px;
 }
 
 /* FOOTER */
-
 footer{
-padding:40px 20px 100px;
-text-align:center;
-font-size:12px;
-color:#888;
+ padding:40px 20px 100px;
+ text-align:center;
+ font-size:12px;
+ color:#888;
 }
-
 </style>
 </head>
 
-<body class="loading">
-
-<!-- INTRO -->
-<div id="intro">
-<img src="odalogo_new20220221(가로).png" id="introLogo">
-</div>
+<body>
 
 <header>
-
 <img src="odalogo_new20220221(가로).png">
-
 <div class="header-right">
-
-<a href="https://www.odacore.com/main"
-target="_blank"
-class="header-icon"
-title="ODA Core Website">
-
+<a href="https://www.odacore.com/main" target="_blank" class="header-icon">
 <i data-lucide="globe"></i>
-
 </a>
-
 </div>
-
 </header>
 
 <section class="hero">
@@ -486,12 +329,10 @@ title="ODA Core Website">
 </section>
 
 <section class="video">
-
 <div class="video-wrap">
 <video id="mainVideo"
 src="https://odatechnologies.github.io/oda/int/kor.mp4"
 autoplay muted loop playsinline></video>
-
 <div id="soundIndicator" class="sound-indicator">🔇</div>
 </div>
 
@@ -499,7 +340,6 @@ autoplay muted loop playsinline></video>
 <button class="active" onclick="changeVideo('kor',this)">KOR</button>
 <button onclick="changeVideo('eng',this)">ENG</button>
 </div>
-
 </section>
 
 <div class="upcoming">
@@ -515,13 +355,9 @@ autoplay muted loop playsinline></video>
 </section>
 
 <section class="catalog">
-
-<div class="catalog-title">
-PRODUCT CATALOG
-</div>
+<div class="catalog-title">PRODUCT CATALOG</div>
 
 <div class="lang-select">
-
 <div class="lang kor" onclick="openCatalog('kor')">
 <div class="title">국문 카탈로그</div>
 <div class="sub">KOREAN CATALOG</div>
@@ -533,27 +369,17 @@ PRODUCT CATALOG
 </div>
 
 <div class="center-guide">
-<span>
-선택해주세요<br>
-Please select
-</span>
+<span>선택해주세요<br>Please select</span>
 </div>
-
 </div>
-
 </section>
 
 <!-- SLIDER -->
 <div id="sliderContainer">
-
 <button class="close-btn" onclick="closeCatalog()">닫기 ✕</button>
-
 <div id="slider"></div>
-
 <div id="indicator">1 / 44</div>
-
-<div id="swipeGuide" class="swipe-guide"><- SWIPE -></div>
-
+<div id="swipeGuide" class="swipe-guide">&lt;- SWIPE -&gt;</div>
 </div>
 
 <a class="float-btn"
@@ -564,162 +390,103 @@ target="_blank">
 </a>
 
 <footer>
-© ODA Technologies <br>
-인천광역시 부평구 부평대로329번길 62 <br>
+© ODA Technologies<br>
+인천광역시 부평구 부평대로329번길 62<br>
 TEL : 1800-8644 / CS TEAM : 070-5032-2921~2
 </footer>
 
 <script>
-
 lucide.createIcons();
 
-/* ================= INTRO ================= */
-
-window.addEventListener("load",()=>{
-
-const intro = document.getElementById("intro");
-const logo = document.getElementById("introLogo");
-const headerLogo = document.querySelector("header img");
-
-document.body.style.overflow="hidden";
-
-setTimeout(()=>{
-intro.classList.add("show");
-},100);
-
-setTimeout(()=>{
-
-const rect = headerLogo.getBoundingClientRect();
-
-logo.style.position="fixed";
-logo.style.top = rect.top + "px";
-logo.style.left = rect.left + "px";
-logo.style.width = headerLogo.offsetWidth + "px";
-
-},1200);
-
-setTimeout(()=>{
-
-intro.classList.add("fade");
-
-document.body.classList.remove("loading");
-document.body.classList.add("loaded");
-
-document.body.style.overflow="auto";
-
-},2000);
-
-setTimeout(()=>{
-intro.remove();
-},2600);
-
-});
-
-
 /* video language change */
-
 function changeVideo(lang,btn){
+ const video=document.getElementById("mainVideo");
 
-const video=document.getElementById("mainVideo");
+ video.src = lang==="kor"
+ ? "https://odatechnologies.github.io/oda/int/kor.mp4"
+ : "https://odatechnologies.github.io/oda/int/eng.mp4";
 
-video.src = lang==="kor"
-? "https://odatechnologies.github.io/oda/int/kor.mp4"
-: "https://odatechnologies.github.io/oda/int/eng.mp4";
+ document.querySelectorAll(".video-toggle button")
+ .forEach(b=>b.classList.remove("active"));
 
-document.querySelectorAll(".video-toggle button")
-.forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
 
-btn.classList.add("active");
-
-video.muted=true;
-document.getElementById("soundIndicator").textContent="🔇";
+ video.muted=true;
+ document.getElementById("soundIndicator").textContent="🔇";
 }
 
 /* video sound toggle */
-
 const videoEl = document.getElementById("mainVideo");
 const soundIndicator = document.getElementById("soundIndicator");
 
 videoEl.addEventListener("click",()=>{
-
-videoEl.muted = !videoEl.muted;
-soundIndicator.textContent = videoEl.muted ? "🔇" : "🔊";
-
+ videoEl.muted = !videoEl.muted;
+ soundIndicator.textContent = videoEl.muted ? "🔇" : "🔊";
 });
 
-
 /* catalog */
-
 const total = 44;
 let index = 0;
 let startX = 0;
 
 function openCatalog(lang){
 
-document.body.style.overflow="hidden";
-document.querySelector(".float-btn").style.display="none";
+ document.body.style.overflow="hidden";
+ document.querySelector(".float-btn").style.display="none";
 
-document.getElementById("sliderContainer").style.display="block";
-document.getElementById("indicator").style.display="block";
+ document.getElementById("sliderContainer").style.display="block";
+ document.getElementById("indicator").style.display="block";
 
-const slider=document.getElementById("slider");
-slider.innerHTML="";
-index=0;
+ const slider=document.getElementById("slider");
+ slider.innerHTML="";
+ index=0;
 
-for(let i=0;i<total;i++){
+ for(let i=0;i<total;i++){
+  const img=document.createElement("img");
+  img.src=`catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
+  slider.appendChild(img);
+ }
 
-const img=document.createElement("img");
+ update();
 
-img.src=`catalogs/${lang}/ODA CATALOG(${lang.toUpperCase()})-이미지-${i}.jpg`;
+ const guide=document.getElementById("swipeGuide");
+ guide.style.display="block";
 
-slider.appendChild(img);
-}
-
-update();
-
-const guide=document.getElementById("swipeGuide");
-guide.style.display="block";
-
-setTimeout(()=>{
-guide.style.display="none";
-},5000);
-
+ setTimeout(()=>{
+  guide.style.display="none";
+ },5000);
 }
 
 function closeCatalog(){
-
-document.body.style.overflow="auto";
-document.querySelector(".float-btn").style.display="flex";
-
-document.getElementById("sliderContainer").style.display="none";
-document.getElementById("indicator").style.display="none";
+ document.body.style.overflow="auto";
+ document.querySelector(".float-btn").style.display="flex";
+ document.getElementById("sliderContainer").style.display="none";
+ document.getElementById("indicator").style.display="none";
 }
 
 function update(){
 
-const slider=document.getElementById("slider");
-const w=slider.children[0].getBoundingClientRect().width;
+ const slider=document.getElementById("slider");
 
-slider.style.transform=`translateX(-${index*w}px)`;
+ const w=slider.children[0].getBoundingClientRect().width;
 
-document.getElementById("indicator").textContent=
-`${index+1} / ${total}`;
+ slider.style.transform=`translateX(-${index*w}px)`;
+
+ document.getElementById("indicator").textContent=`${index+1} / ${total}`;
 }
 
 document.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX;
+ startX=e.touches[0].clientX;
 });
 
 document.addEventListener("touchend",e=>{
+ const diff=startX-e.changedTouches[0].clientX;
 
-const diff=startX-e.changedTouches[0].clientX;
+ if(diff>50 && index<total-1) index++;
+ if(diff<-50 && index>0) index--;
 
-if(diff>50 && index<total-1) index++;
-if(diff<-50 && index>0) index--;
-
-update();
+ update();
 });
-
 </script>
 
 </body>
